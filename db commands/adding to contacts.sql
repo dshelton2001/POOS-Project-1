@@ -1,4 +1,6 @@
 -- Using this file to run lots of commands because typing in a console is absolutely boring
+USE COP4331;
+
 insert into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES ('Wacky', 'Guy', '5555555555', 'wackyguy23@gmail.com', '1');
 insert into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES ('William', 'Afton', '1235554567', 'fivenights@freddies.org', '1');
 insert into Contacts (FirstName, LastName, Phone, Email, UserID) VALUES ('Sarah', 'Sell', '9415559832', 'seashell@seashore.com', '1');
