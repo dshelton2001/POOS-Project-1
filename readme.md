@@ -11,4 +11,4 @@
 - Gadi
 
 ## Database
-- Dennis Shelton
+- Dennis
