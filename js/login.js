@@ -44,3 +44,15 @@ function doLogin() {
         loginResultText.innerHTML = err.message;
     }
 }
+
+usernameInput.addEventListener('keypress', (e) => {
+    if (e.key == 'Enter') {
+        doLogin();
+    }
+});
+
+passwordInput.addEventListener('keypress', (e) => {
+    if (e.key == 'Enter') {
+        doLogin();
+    }
+});
