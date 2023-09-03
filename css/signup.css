@@ -1,0 +1,35 @@
+.parentDiv {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+body {
+	background-color: #F2EE9D;
+}
+.userDetailsDiv {
+	margin-top: 150px;
+	background-color: #7A9D54;
+	border-width: 13px;
+	border-radius: 7px;
+	padding: 40px 60px 60px 60px;
+}
+
+.signupTitle {
+	text-align: center;
+}
+
+.userDiv {
+	margin-top: 5px;
+}
+
+.ConfirmBtn {
+	display: flex;
+	margin-top: 14px;
+	padding: 10px 20px 10px 20px;
+	border-radius: 7px;
+}
+
+.UserInfo {
+	display: inline;
+}
