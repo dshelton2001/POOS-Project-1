@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>SignUp Page</title>
+		<script defer src="js/md5.js"></script>
+    	<script defer src="js/cookies.js"></script>
+    	<script defer src="js/signup.js"></script>
+		<link href="css/signup.css" rel="stylesheet">	
+	</head>
+
+	<body>
+		<div class="parentDiv">
+		  <div class="userDetailsDiv" id="signUpInformation">
+				<h1 class="signupTitle">Sign up</h1>
+				<div class="userDiv">
+					<h2 class="UserInfo">First Name</h2>
+					<input type="text" class="signupdetails" id="firstnameInput">
+				</div>
+				<div class="userDiv">
+					<h2 class="UserInfo">Last Name</h2>
+					<input type="text" class="signupdetails" id="lastnameInput">
+				</div>
+				<div class="userDiv">
+					<h2 class="UserInfo">Username</h2>
+				<input type="text" class="signupdetails" id="usernameInput">
+				</div>
+				<div class="userDiv">
+					<h2 class="UserInfo">Password</h2>
+				<input type="text" class="signupdetails" id="passwordInput">
+				</div>
+				<button type="button" class="signupdetails"  id="ConfirmBtn" onclick="findUser();">Sign Up</button>
+				<p id="errMsg"></p>
+			</div>
+		</div>
+	</body>
+
+</html>
