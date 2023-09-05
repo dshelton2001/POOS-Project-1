@@ -12,10 +12,12 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ? WHERE ID=?");
+		$stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Phone = ?, Email = ? WHERE ID=?");
 		$contactName = $inData["updatedFirst"];
         $contactName2 = $inData["updatedLast"];
-		$stmt->bind_param("sss", $contactName, $contactName2, $inData["Id"]);
+		$updatedPhone = $inData["updatedPhone"];
+        $updatedEmail = $inData["updatedEmail"];
+		$stmt->bind_param("sssss", $contactName, $contactName2, $updatedPhone, $updatedEmail, $inData["Id"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
