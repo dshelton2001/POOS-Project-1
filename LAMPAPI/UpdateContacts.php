@@ -13,8 +13,8 @@
 	else
 	{
 		$stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ? WHERE ID=?");
-		$contactName = "%" . $inData["updatedFirst"] . "%";
-        $contactName2 = "%" . $inData["updatedLast"] . "%";
+		$contactName = $inData["updatedFirst"];
+        $contactName2 = $inData["updatedLast"];
 		$stmt->bind_param("sss", $contactName, $contactName2, $inData["Id"]);
 		$stmt->execute();
 		
