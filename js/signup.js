@@ -31,14 +31,19 @@ function doSignUp() {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-	try {
-        xhr.onreadystatechange = function () {
+	
+	try 
+	{
+        xhr.onreadystatechange = function () 
+		{
             if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
                 window.location.href = 'contacts.html';
             }
         };
 		xhr.send(jsonPayload);
-		} catch (err) {
+		} 
+		catch (err) 
+		{
 			errMsg.innerHTML = err.message; 
 		}
 }
@@ -46,8 +51,8 @@ function doSignUp() {
 // Checks for duplicate username
 function findUser () {
 	let srch = usernameInput.value;
-	
-	let tmp = { userId: userId, search:srch};	
+
+	let tmp = { userId:userId, search:srch};	
     let jsonPayload = JSON.stringify(tmp);
 
 	let url = apiUrlBase + '/' + searchEndpoint;
@@ -56,19 +61,38 @@ function findUser () {
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
 
-	try {
-        xhr.onreadystatechange = function () {
+	try 
+	{
+        xhr.onreadystatechange = function () 
+		{
             if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
-                let jsonObject = JSON.parse(xhr.responseText);
-                if (jsonObject.results.length > 0) {
-                    errMsg.innerHTML = 'Invalid Username';
-                    return;
-                }
+                let jsonObject = JSON.parse( xhr.responseText );
+				
+				for( let i = 0; i < jsonObject.results.length; i++ )
+				{
+					if (jsonObject.results[i].value == srch) 
+					{
+						errMsg.innerHTML = 'Invalid Username';
+						return;
+					}
+				}
 				doSignUp();
             }
         };
 		xhr.send(jsonPayload);
-		} catch (err) {
+		} 
+		catch (err) 
+		{
 			errMsg.innerHTML = err.message; 
 		}
+}
+
+function checkEmptyInput () {
+	if(firstnameInput.value == "" || lastnameInput.value == "" ||
+	   usernameInput.value == "" || passwordInput.value == "") 
+	   {
+		errMsg.innerHTML = 'Please fill all boxes';
+		return;
+	   }
+	   findUser();
 }
