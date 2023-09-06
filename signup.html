@@ -6,33 +6,28 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<title>SignUp Page</title>
-		<script defer src="js/md5.js"></script>
-    	<script defer src="js/cookies.js"></script>
+			<script defer src="js/md5.js"></script>
+    	<script defer src="js/cookie.js"></script>
     	<script defer src="js/signup.js"></script>
 		<link href="css/signup.css" rel="stylesheet">	
 	</head>
 
 	<body>
+		<a href="login.html"><button id="cancelBtn">Cancel</button></a>
 		<div class="parentDiv">
 		  <div class="userDetailsDiv" id="signUpInformation">
 				<h1 class="signupTitle">Sign up</h1>
 				<div class="userDiv">
-					<h2 class="UserInfo">First Name</h2>
-					<input type="text" class="signupdetails" id="firstnameInput">
+					<input type="text" class="inputBox" id="firstnameInput" placeholder="Firstname">
+					<input type="text" class="inputBox" id="lastnameInput" placeholder="Lastname">
 				</div>
-				<div class="userDiv">
-					<h2 class="UserInfo">Last Name</h2>
-					<input type="text" class="signupdetails" id="lastnameInput">
+				<div class="userDiv">	
+				<input type="text" class="inputBox" id="usernameInput" placeholder="Username">
+				<input type="password" class="inputBox" id="passwordInput" placeholder="Password">
 				</div>
-				<div class="userDiv">
-					<h2 class="UserInfo">Username</h2>
-				<input type="text" class="signupdetails" id="usernameInput">
+				<div id="buttondiv">
+					<button type="button" class="signupdetails"  id="ConfirmBtn" onclick="checkEmptyInput();">Sign Up</button>
 				</div>
-				<div class="userDiv">
-					<h2 class="UserInfo">Password</h2>
-				<input type="text" class="signupdetails" id="passwordInput">
-				</div>
-				<button type="button" class="signupdetails"  id="ConfirmBtn" onclick="checkEmptyInput();">Sign Up</button>
 				<p id="errMsg"></p>
 			</div>
 		</div>
