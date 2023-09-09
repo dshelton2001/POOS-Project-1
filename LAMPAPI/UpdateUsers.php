@@ -31,16 +31,8 @@
 
             $result0 = $mysqli->query($query);
     
-            if ($result0) {
-                if (mysqli_num_rows($result0) > 0) {
-                    returnWithError( "Username already taken" );
-                    $stmt2->close();
-                    $conn->close();
-                } else {
-                    
-                }
-            } else {
-                returnWithError( "No Records Found" );
+            if ($result0 == $updatedUser) {
+                returnWithError( "Username already taken" );
                 $stmt2->close();
                 $conn->close();
             }
