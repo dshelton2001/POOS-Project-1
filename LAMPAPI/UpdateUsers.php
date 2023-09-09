@@ -29,9 +29,9 @@
         for($i = 1; $i <= $rowcount; $i++){
             $query = "SELECT Username FROM Users WHERE ID = $i";
 
-            $result0 = $mysqli->query($query);
+            $result1 = $mysqli->query($query);
     
-            if ($result0 == $updatedUser) {
+            if ($result1 == $updatedUser) {
                 returnWithError( "Username already taken" );
                 $conn->close();
             }
