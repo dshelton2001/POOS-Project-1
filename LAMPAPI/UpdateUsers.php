@@ -33,7 +33,6 @@
     
             if ($result0 == $updatedUser) {
                 returnWithError( "Username already taken" );
-                $stmt2->close();
                 $conn->close();
             }
         }
