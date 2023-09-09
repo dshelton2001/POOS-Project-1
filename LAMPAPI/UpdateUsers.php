@@ -19,23 +19,31 @@
 		$stmt1->bind_param("ss", $updatedUser, $userID);
 
         //query code
-        $stmt2 = $conn->prepare("SELECT Username FROM Users");
-        $stmt2->bind_param("s", $userID);
-        $stmt2->execute();
-        $result0 = $stmt2->get_result();
+        $sql = "SELECT * FROM Users";
+  
+        if ($result = mysqli_query($con, $sql)) {
+            //get total num of rows
+            $rowcount = mysqli_num_rows( $result );
+        }
 
-        if ($result0) {
-            if (mysqli_num_rows($result0) > 0) {
-                returnWithError( "Username already taken" );
+        for($i = 1; $i <= $rowcount; $i++){
+            $query = "SELECT Username FROM Users WHERE ID = $i";
+
+            $result0 = $mysqli->query($query);
+    
+            if ($result0) {
+                if (mysqli_num_rows($result0) > 0) {
+                    returnWithError( "Username already taken" );
+                    $stmt2->close();
+                    $conn->close();
+                } else {
+                    
+                }
+            } else {
+                returnWithError( "No Records Found" );
                 $stmt2->close();
                 $conn->close();
-            } else {
-                
             }
-        } else {
-            returnWithError( "No Records Found" );
-            $stmt2->close();
-            $conn->close();
         }
         
         ///////////////////
