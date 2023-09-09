@@ -21,7 +21,7 @@
         //query code
         $sql = "SELECT * FROM Users";
   
-        if ($result = mysqli_query($con, $sql)) {
+        if ($result0 = mysqli_query($con, $sql)) {
             //get total num of rows
             $rowcount = mysqli_num_rows( $result );
         }
