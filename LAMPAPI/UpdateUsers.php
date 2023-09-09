@@ -23,7 +23,7 @@
   
         if ($result0 = mysqli_query($con, $sql)) {
             //get total num of rows
-            $rowcount = mysqli_num_rows( $result );
+            $rowcount = mysqli_num_rows( $result0 );
         }
 
         for($i = 1; $i <= $rowcount; $i++){
