@@ -14,14 +14,16 @@
 </head>
 
 <body>
+    <a href="index.html"><img id="webLogo" src="images/logo.png"></a>
     <h1 id="loginTitle">Login</h1>
     <div id="loginContainer">
-        <p id="loginResultText"></p>
+        <p id="loginResultText" class="loginText"></p>
         <input type="text" class="innercontents" id="usernameInput" placeholder="Username" /><br />
         <input type="password" class="innercontents" id="passwordInput" placeholder="Password" /><br />
         <button type="button" class="innercontents" id="loginButton" class="buttons" onclick="doLogin();">
             Log In
         </button>
+        <p class="loginText">Not Registered? <a id="signUpText" href="signup.html">Sign Up</a></p>
     </div>
 </body>
 

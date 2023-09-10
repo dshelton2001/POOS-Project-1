@@ -15,9 +15,11 @@ const loginEndpoint = 'Login.php'
 function doLogin() {
     let username = usernameInput.value;
     let password = passwordInput.value;
-    let hash = md5(password);
+    
+    //! Re-enable hasing after Login / Sign Up completion
+    //let hash = md5(password);
 
-    let tmp = { login: username, password: hash };
+    let tmp = { login: username, password: password };
     let jsonPayload = JSON.stringify(tmp);
 
     let url = apiUrlBase + '/' + loginEndpoint;
