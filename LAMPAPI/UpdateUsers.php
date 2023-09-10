@@ -1,9 +1,6 @@
 <?php
 
 	$inData = getRequestInfo();
-	
-	$searchResults = "";
-	$searchCount = 0;
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -17,50 +14,8 @@
 		$updatedUser = $inData["updatedUser"];
         $userID = $inData["Id"];
 		$stmt1->bind_param("ss", $updatedUser, $userID);
-
-        //query code
-        $sql = "SELECT * FROM Users";
-  
-        if ($result0 = mysqli_query($con, $sql)) {
-            //get total num of rows
-            $rowcount = mysqli_num_rows( $result0 );
-        }
-
-        for($i = 1; $i <= $rowcount; $i++){
-            $query = "SELECT Username FROM Users WHERE ID = $i";
-
-            $result1 = $mysqli->query($query);
-    
-            if ($result1 == $updatedUser) {
-                returnWithError( "Username already taken" );
-                $conn->close();
-            }
-        }
-        
-        ///////////////////
-
 		$stmt1->execute();
-		
-		$result = $stmt1->get_result();
-		
-		while($row = $result->fetch_assoc())
-		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			$searchResults .= '{"FirstName" : "' . $row["FirstName"] . '", "LastName" : "' . $row["LastName"] . '", "Updated User" : "' . $row["Username"] . '", "Updated Pass" : "' . $row["Password"] . '"}';
-		}
-		
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
-		}
-		else
-		{
-			returnWithInfo( $searchResults );
-		}
+
 		
 		$stmt1->close();
 		$conn->close();
