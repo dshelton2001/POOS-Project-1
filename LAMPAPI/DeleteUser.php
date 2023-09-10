@@ -2,7 +2,7 @@
 
     $inData = getRequestInfo();
     $userName = $inData["userName"];
-    #$pwd = $inData["pwd"];
+    #$pwd = $inData["pwd"]; <---- will this be needed for Front End Checking?
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
