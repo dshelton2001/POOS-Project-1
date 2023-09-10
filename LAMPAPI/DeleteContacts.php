@@ -1,8 +1,8 @@
 <?php
 
     $inData = getRequestInfo();
-    $fName = $inData["fName"];
-    $lName = $inData["lName"];
+    $contactUserID = $inData["contactUserID"]; #The Contact Book Holder
+    $uniqueID = $inData["uniqueID"]; #Index of our Database,
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -11,13 +11,15 @@
 	}
     else
     {
-        $stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName=? AND LastName=?");
-		$stmt->bind_param("s",$fName,$lName);
+        $stmt = $conn->prepare("DELETE FROM Contacts WHERE (ID=? AND UserID=?)");
+		$stmt->bind_param("ss",$uniqueID,$contactUserID);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
 		returnWithError("");
     } 
+   
+
 
     function getRequestInfo()
 	{
