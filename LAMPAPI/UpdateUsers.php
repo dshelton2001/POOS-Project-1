@@ -15,7 +15,6 @@
         $userID = $inData["Id"];
 		$stmt1->bind_param("ss", $updatedUser, $userID);
 		$stmt1->execute();
-
 		
 		$stmt1->close();
 		$conn->close();

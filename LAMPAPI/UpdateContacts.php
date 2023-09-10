@@ -2,9 +2,6 @@
 
 	$inData = getRequestInfo();
 	
-	$searchResults = "";
-	$searchCount = 0;
-
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
 	{
@@ -20,27 +17,6 @@
 		$stmt->bind_param("sssss", $contactName, $contactName2, $updatedPhone, $updatedEmail, $inData["Id"]);
 		$stmt->execute();
 		
-		$result = $stmt->get_result();
-		
-		while($row = $result->fetch_assoc())
-		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			//$searchResults .= '"' . $row["FirstName"] . '"';
-			$searchResults .= '{"FirstName" : "' . $row["FirstName"] . '", "LastName" : "' . $row["LastName"] . '", "Phone" : "' . $row["Phone"] . '", "Email" : "' . $row["Email"] . '"}';
-		}
-		
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
-		}
-		else
-		{
-			returnWithInfo( $searchResults );
-		}
 		
 		$stmt->close();
 		$conn->close();
