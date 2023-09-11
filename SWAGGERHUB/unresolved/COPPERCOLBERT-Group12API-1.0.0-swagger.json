@@ -1,0 +1,351 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is the API documentation for the COP 4331 Group 12 Contacts App",
+    "version" : "1.0.0",
+    "title" : "The Contacts Web App",
+    "contact" : {
+      "email" : "ga598386@ucf.edu"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths" : {
+    "/Login.php" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Logs in to the contacts app",
+        "operationId" : "dlLogin",
+        "description" : "Logs in to contacts app",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "loginItem",
+          "description" : "Login",
+          "schema" : {
+            "$ref" : "#/definitions/Login"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "URL Not Found"
+          },
+          "500" : {
+            "description" : "Server Error"
+          }
+        }
+      }
+    },
+    "/SignUp.php" : {
+      "post" : {
+        "tags" : [ "Users", "Signup", "Register" ],
+        "summary" : "Adds a user",
+        "operationId" : "signUp",
+        "description" : "Adds a user to the user app database",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "userItem",
+          "description" : "User",
+          "schema" : {
+            "$ref" : "#/definitions/SignUp"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "URL Not Found"
+          },
+          "500" : {
+            "description" : "Server Error"
+          }
+        }
+      }
+    },
+    "/DeleteUser.php" : {
+      "post" : {
+        "tags" : [ "Users", "Delete" ],
+        "summary" : "Deletes a user",
+        "operationId" : "deleteUser",
+        "description" : "Deletes a user to the user app database",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "deleteUser",
+          "description" : "delete User",
+          "schema" : {
+            "$ref" : "#/definitions/deleteUser"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "URL Not Found"
+          },
+          "500" : {
+            "description" : "Server Error"
+          }
+        }
+      }
+    },
+    "/SearchContacts.php" : {
+      "post" : {
+        "tags" : [ "Search", "Contacts" ],
+        "summary" : "Searches contacts",
+        "operationId" : "searchContacts",
+        "description" : "Searches contacts from the contacts app database",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "searchContact",
+          "description" : "Contact Search",
+          "schema" : {
+            "$ref" : "#/definitions/contactSearch"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "URL Not Found"
+          },
+          "500" : {
+            "description" : "Server Error"
+          }
+        }
+      }
+    },
+    "/AddContacts.php" : {
+      "post" : {
+        "tags" : [ "Add", "Contacts" ],
+        "summary" : "Adds contacts",
+        "operationId" : "addContacts",
+        "description" : "Adds contacts to the contacts app database",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "addContact",
+          "description" : "Contact Addition",
+          "schema" : {
+            "$ref" : "#/definitions/contactAdd"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "URL Not Found"
+          },
+          "500" : {
+            "description" : "Server Error"
+          }
+        }
+      }
+    },
+    "/DeleteContacts.php" : {
+      "post" : {
+        "tags" : [ "Delete", "Contacts" ],
+        "summary" : "Deletes contacts",
+        "operationId" : "deleteContacts",
+        "description" : "Deletes contacts to the contacts app database",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "deleteContact",
+          "description" : "Contact Deletion",
+          "schema" : {
+            "$ref" : "#/definitions/contactDelete"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "URL Not Found"
+          },
+          "500" : {
+            "description" : "Server Error"
+          }
+        }
+      }
+    },
+    "/UpdateContacts.php" : {
+      "post" : {
+        "tags" : [ "Update", "Contacts" ],
+        "summary" : "Updates contact info",
+        "operationId" : "updateContacts",
+        "description" : "updates contacts info to the contacts app database",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "updateContact",
+          "description" : "Contact Update",
+          "schema" : {
+            "$ref" : "#/definitions/contactUpdate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "404" : {
+            "description" : "URL Not Found"
+          },
+          "500" : {
+            "description" : "Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Login" : {
+      "type" : "object",
+      "required" : [ "login", "password" ],
+      "properties" : {
+        "login" : {
+          "type" : "string",
+          "example" : "fred"
+        },
+        "password" : {
+          "type" : "string",
+          "example" : "secret"
+        }
+      }
+    },
+    "deleteUser" : {
+      "type" : "object",
+      "required" : [ "userName" ],
+      "properties" : {
+        "userName" : {
+          "type" : "string",
+          "example" : "JTester01"
+        }
+      }
+    },
+    "SignUp" : {
+      "type" : "object",
+      "required" : [ "fName", "lName", "userName", "pwd" ],
+      "properties" : {
+        "firstName" : {
+          "type" : "string",
+          "example" : "John"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "Apple"
+        },
+        "userName" : {
+          "type" : "string",
+          "example" : "JApple01"
+        },
+        "pwd" : {
+          "type" : "string",
+          "example" : "P@ssW0rd01"
+        }
+      }
+    },
+    "contactSearch" : {
+      "type" : "object",
+      "required" : [ "userId", "search" ],
+      "properties" : {
+        "userId" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "search" : {
+          "type" : "string",
+          "example" : "bl"
+        }
+      }
+    },
+    "contactAdd" : {
+      "type" : "object",
+      "required" : [ "fName", "lName", "phoneNum", "emailAdd", "userID" ],
+      "properties" : {
+        "fName" : {
+          "type" : "string",
+          "example" : "John"
+        },
+        "lName" : {
+          "type" : "string",
+          "example" : "Apple"
+        },
+        "phoneNum" : {
+          "type" : "string",
+          "example" : "9876543210"
+        },
+        "emailAdd" : {
+          "type" : "string",
+          "example" : "JohnApple@users.net"
+        },
+        "userID" : {
+          "type" : "integer",
+          "example" : 1
+        }
+      }
+    },
+    "contactDelete" : {
+      "type" : "object",
+      "required" : [ "contactUserID", "uniqueID" ],
+      "properties" : {
+        "contactUserID" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "uniqueID" : {
+          "type" : "integer",
+          "example" : 1
+        }
+      }
+    },
+    "contactUpdate" : {
+      "type" : "object",
+      "required" : [ "Id", "updatedFirst", "updatedLast", "updatedPhone", "updatedEmail" ],
+      "properties" : {
+        "Id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "updatedFirst" : {
+          "type" : "string",
+          "example" : "Joe"
+        },
+        "updatedLast" : {
+          "type" : "string",
+          "example" : "Joleen"
+        },
+        "updatedPhone" : {
+          "type" : "integer",
+          "example" : 4076895462
+        },
+        "updatedEmail" : {
+          "type" : "string",
+          "example" : "example@ex.com"
+        }
+      }
+    }
+  },
+  "host" : "cop433112.com",
+  "basePath" : "/LAMPAPI",
+  "schemes" : [ "http" ]
+}
