@@ -23,6 +23,10 @@ body {
 	position:relative; bottom:20px;
 }
 
+.inputTitle {
+	display: inline;
+}
+
 .userDiv {
 	margin-top: 5px;
 	text-align: center;
@@ -35,6 +39,7 @@ body {
 	border-radius: 10px;
 	border: none;
 	font-size: 23px;
+	margin-bottom: 10px;
 }
 
 #buttondiv {
