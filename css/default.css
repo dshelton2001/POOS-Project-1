@@ -1,4 +1,28 @@
-body
-{
-	background-color: gray;
+body {
+    background-image: url(../images/background.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#welcomeDiv {
+	text-align: center;
+}
+
+ .indexbtn {
+	border-radius: 7px;
+	cursor: pointer;
+	border-color: rgba(0, 0, 0, 0.25);
+    border-style: none;
+    border-width: 2px;
+	font-size: 19px;
+ }
+
+ a {
+	text-decoration: none;
+	color: black;
+ }
+
+ .indexbtn:hover {
+    background-color: #F2EE9D;
 }
