@@ -12,8 +12,7 @@ const apiUrlBase = 'http://cop433112.com/LAMPAPI';
 const userId = 0;
 
 // Backend Endpoints
-const signupEndpoint = 'AddUser.php'
-const searchEndpoint = 'SearchUsers.php'
+const signupEndpoint = 'SignUp.php'
 
 // Adds user to database
 function doSignUp() {
@@ -23,7 +22,7 @@ function doSignUp() {
 	let password = passwordInput.value;
 	let hash = md5(password);
 
-	let tmp = { userId: userId, firstName: firstName, lastName: lastName};	
+	let tmp = { firstName: firstName, lastName: lastName, userName: userName, password: hash};	
     let jsonPayload = JSON.stringify(tmp);
 
 	let url = apiUrlBase + '/' + signupEndpoint;
@@ -37,46 +36,9 @@ function doSignUp() {
         xhr.onreadystatechange = function () 
 		{
             if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
-                window.location.href = 'contacts.html';
-            }
-        };
-		xhr.send(jsonPayload);
-		} 
-		catch (err) 
-		{
-			errMsg.innerHTML = err.message; 
-		}
-}
-
-// Checks for duplicate username
-function findUser () {
-	let srch = usernameInput.value;
-
-	let tmp = { userId:userId, search:srch};	
-    let jsonPayload = JSON.stringify(tmp);
-
-	let url = apiUrlBase + '/' + searchEndpoint;
-
-	let xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-
-	try 
-	{
-        xhr.onreadystatechange = function () 
-		{
-            if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
-                let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i = 0; i < jsonObject.results.length; i++ )
-				{
-					if (jsonObject.results[i].value == srch) 
-					{
-						errMsg.innerHTML = 'Invalid Username';
-						return;
-					}
-				}
-				doSignUp();
+				let jsonObject = JSON.parse(xhr.responseText);
+				saveUserCookie(jsonObject.id, jsonObject.firstName, jsonObject.lastName, jsonObject.userName, jsonObject.password);
+                window.location.href = 'login.html';
             }
         };
 		xhr.send(jsonPayload);
@@ -94,5 +56,5 @@ function checkEmptyInput () {
 		errMsg.innerHTML = 'Please fill all boxes';
 		return;
 	   }
-	   findUser();
+	   doSignUp();
 }
