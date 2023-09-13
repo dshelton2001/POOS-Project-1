@@ -22,7 +22,7 @@ function doSignUp() {
 	let password = passwordInput.value;
 	let hash = md5(password);
 
-	let tmp = { firstName: firstName, lastName: lastName, userName: userName, password: hash};	
+	let tmp = { fName: firstName, lName: lastName, userName: userName, pwd: hash};	
     let jsonPayload = JSON.stringify(tmp);
 
 	let url = apiUrlBase + '/' + signupEndpoint;
