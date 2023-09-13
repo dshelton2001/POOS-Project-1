@@ -49,6 +49,45 @@ function doSignUp() {
 		}
 }
 
+// Checks for duplicate username
+function findUser () {
+	let srch = usernameInput.value;
+
+	let tmp = { userId:userId, search:srch};	
+    let jsonPayload = JSON.stringify(tmp);
+
+	let url = apiUrlBase + '/' + searchEndpoint;
+
+	let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+
+	try 
+	{
+        xhr.onreadystatechange = function () 
+		{
+            if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+                let jsonObject = JSON.parse( xhr.responseText );
+				
+				for( let i = 0; i < jsonObject.results.length; i++ )
+				{
+					if (jsonObject.results[i].value == srch) 
+					{
+						errMsg.innerHTML = 'Invalid Username';
+						return;
+					}
+				}
+				doSignUp();
+            }
+        };
+		xhr.send(jsonPayload);
+		} 
+		catch (err) 
+		{
+			errMsg.innerHTML = err.message; 
+		}
+}
+
 function checkEmptyInput () {
 	if(firstnameInput.value == "" || lastnameInput.value == "" ||
 	   usernameInput.value == "" || passwordInput.value == "") 
