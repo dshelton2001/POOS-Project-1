@@ -5,8 +5,12 @@
 }
 
 body {
-	background-color: white;
+    background-image: url(../images/background.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 .userDetailsDiv {
 	margin-top: 150px;
 	padding-top: 20px;
