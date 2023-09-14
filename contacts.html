@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Manager</title>
+    <script defer src="js/md5.js"></script>
+    <script defer src="js/cookies.js"></script>
+    <script defer src="js/contacts.js"></script>
+    <link href="css/contacts.css" rel="stylesheet" />
+</head>
+
+<body>
+    <ul>
+        <li><img id="web-logo" src="images/logo.png"></li>
+        <li><p id="welcome-text">Welcome, !</p></li>
+        <li class="right-li"><a href="javascript:doLogOut()">Log Out</a></li>
+        <li class="right-li"><a href="javascript:doDeleteUser()">Delete Account</a></li>
+    </ul>
+
+    <input type="text" id="search-input" placeholder="Search..." autocomplete="off" />
+    <button onclick="doSearchContacts()">Search</button>
+    <button onclick="doAddContacts()">Add Contact</button><br />
+
+    <table id="contacts-table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="contacts-table-body">
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
