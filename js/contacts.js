@@ -15,8 +15,9 @@ const searchContactsEndpoint = 'SearchContacts.php';
 const updateContactsEndpoint = 'UpdateContacts.php';
 const deleteContactsEndpoint = 'DeleteContacts.php';
 
-// User
+// Data
 let user = {};
+let tableContacts = [];
 
 setUp();
 
@@ -41,7 +42,7 @@ function doesUserExist(user) {
 
 function doAddContacts() {
     // TODO
-    console.log('Not implemented');
+    console.log('doAddContacts() Not implemented');
 }
 
 function doSearchContacts() {
@@ -59,7 +60,8 @@ function doSearchContacts() {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (!jsonObject.hasOwnProperty("results")) {
-                    console.log("Error with search query...");
+                    contactsTable.innerHTML = `<tr></tr>`;
+                    tableContacts = [];
                     return;
                 }
 
@@ -74,28 +76,59 @@ function doSearchContacts() {
 
 function populateContactsTable(contacts) {
     contactsTable.innerHTML = `<tr></tr>`;
+    tableContacts = contacts;
 
-    contacts.forEach( contact => {
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
         let phone = "(" + contact.Phone.substring(0, 3) + ")" + " " + contact.Phone.substring(3, 6) + "-" + contact.Phone.substring(6);
         let row = contactsTable.insertRow();
         row.insertCell(0).innerHTML = contact.FirstName;
         row.insertCell(1).innerHTML = contact.LastName;
         row.insertCell(2).innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
         row.insertCell(3).innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
-        // TODO Insert edit/delete buttons
-        row.insertCell(4);
-    });
+        row.insertCell(4).innerHTML = `<button class="fa fa-edit" onclick="doUpdateContacts(${i})"></button>
+        <button class="fa fa-close" onclick="doDeleteContacts(${i})"></button>`;
+    }
 }
 
 function doUpdateContacts() {
     // TODO
-    console.log('Not implemented');
+    console.log('doUpdateContacts() Not implemented');
 }
 
-function doDeleteContacts() {
-    // TODO
-    alert("Are you sure?");
-    console.log('Not implemented');
+function doDeleteContacts(rowIndex) {
+    let contact = tableContacts[rowIndex];
+
+    if (!confirm(`Are you sure you want to delete the contact for ${contact.FirstName} ${contact.LastName}?`)) {
+        return;
+    }
+
+    let tmp = { contactUserID: contact.ID, uniqueID: user.userId };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = apiUrlBase + '/' + deleteContactsEndpoint;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.error.length > 0 ) {
+                    console.log("Error when deleting contact...");
+                    return;
+                }
+
+                tableContacts.splice(rowIndex, 1);
+                populateContactsTable(tableContacts);
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log("Error: " + err);
+    }
 }
 
 function doLogOut() {
@@ -105,8 +138,12 @@ function doLogOut() {
 }
 
 function doDeleteUser() {
+    if (!confirm("Are you sure you want to delete your account?")) {
+        return;
+    }
+
     // TODO
-    console.log('Not implemented');
+    console.log('doDeleteUser() Not implemented');
 }
 
 searchInput.addEventListener('keypress', (e) => {
