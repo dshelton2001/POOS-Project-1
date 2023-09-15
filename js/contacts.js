@@ -103,7 +103,7 @@ function doDeleteContacts(rowIndex) {
         return;
     }
 
-    let tmp = { contactUserID: contact.ID, uniqueID: user.userId };
+    let tmp = { uniqueID: contact.ID, contactUserID: user.userId };
     let jsonPayload = JSON.stringify(tmp);
 
     let url = apiUrlBase + '/' + deleteContactsEndpoint;
