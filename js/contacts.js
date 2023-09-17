@@ -3,6 +3,13 @@ const welcomeTitle = document.querySelector('#welcome-text');
 const searchInput = document.querySelector('#search-input');
 const contactsTable = document.querySelector('#contacts-table-body');
 
+const contactInfo = document.querySelector('#contact-info');
+const firstNameInput = document.querySelector('#fname-input');
+const lastNameInput = document.querySelector('#lname-input');
+const phoneInput = document.querySelector('#phone-input');
+const emailInput = document.querySelector('#email-input');
+const submitButton = document.querySelector('#submit-button');
+
 // Constant Variables
 const HttpStatus = { success: 200 };
 const XhrReadyState = { done: 4 };
@@ -40,9 +47,49 @@ function doesUserExist(user) {
     return true;
 }
 
+function openAddContacts() {
+    contactInfo.removeAttribute('hidden');
+    firstNameInput.value = '';
+    lastNameInput.value = '';
+    phoneInput.value = '';
+    emailInput.value = '';
+    submitButton.innerHTML = 'Create';
+    submitButton.setAttribute('onclick', 'doAddContacts()');
+}
+
 function doAddContacts() {
-    // TODO
-    console.log('doAddContacts() Not implemented');
+    let tmp = {
+        fName : firstNameInput.value,
+        lName : lastNameInput.value,
+        phoneNum : phoneInput.value,
+        emailAdd : emailInput.value,
+        userId : user.userId
+    };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = apiUrlBase + '/' + addContactsEndpoint;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.error.length > 0 ) {
+                    console.log("Error when creating contact...");
+                    return;
+                }
+                
+                contactInfo.setAttribute("hidden", "");
+                doSearchContacts();
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log("Error: " + err);
+    }
 }
 
 function doSearchContacts() {
@@ -86,9 +133,20 @@ function populateContactsTable(contacts) {
         row.insertCell(1).innerHTML = contact.LastName;
         row.insertCell(2).innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
         row.insertCell(3).innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
-        row.insertCell(4).innerHTML = `<button class="fa fa-edit" onclick="doUpdateContacts(${i})"></button>
+        row.insertCell(4).innerHTML = `<button class="fa fa-edit" onclick="openUpdateContacts(${i})"></button>
         <button class="fa fa-close" onclick="doDeleteContacts(${i})"></button>`;
     }
+}
+
+function openUpdateContacts(rowIndex) {
+    let contact = tableContacts[rowIndex];
+    contactInfo.removeAttribute('hidden');
+    firstNameInput.value = contact.FirstName;
+    lastNameInput.value = contact.LastName;
+    phoneInput.value = contact.Phone;
+    emailInput.value = contact.Email;
+    submitButton.innerHTML = 'Update';
+    submitButton.setAttribute('onclick', 'doUpdateContacts()');
 }
 
 function doUpdateContacts() {
@@ -149,5 +207,11 @@ function doDeleteUser() {
 searchInput.addEventListener('keypress', (e) => {
     if (e.key == 'Enter') {
         doSearchContacts();
+    }
+});
+
+contactInfo.addEventListener('click', (e) =>  {
+    if (e.target.id == 'contact-info') {
+        contactInfo.setAttribute('hidden', '');
     }
 });
