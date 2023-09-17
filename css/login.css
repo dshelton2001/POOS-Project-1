@@ -39,6 +39,10 @@ body
     border-radius: 10px;
 }
 
+#loginContainer span {
+    font-size: 30px;
+}
+
 #loginTitle {
     color: aliceblue;
     text-align: center;
@@ -46,11 +50,11 @@ body
 }
 
 #usernameInput {
-    width: 75%;
+    width: 70%;
 }
 
 #passwordInput {
-    width: 75%;
+    width: 70%;
 }
 
 #loginButton {

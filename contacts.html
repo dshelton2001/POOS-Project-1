@@ -11,6 +11,7 @@
     <script defer src="js/cookies.js"></script>
     <script defer src="js/contacts.js"></script>
     <link href="css/contacts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -22,8 +23,8 @@
     </ul>
 
     <input type="text" id="search-input" placeholder="Search..." autocomplete="off" />
-    <button onclick="doSearchContacts()">Search</button>
-    <button onclick="doAddContacts()">Add Contact</button><br />
+    <button class="fa fa-search" onclick="doSearchContacts()"></button>
+    <button class="fa fa-plus" onclick="openAddContacts()"></button><br />
 
     <table id="contacts-table">
         <thead>
@@ -40,6 +41,20 @@
             </tr>
         </tbody>
     </table>
+
+    <div id="contact-info" hidden>
+        <div class="container">
+            <span>First Name</span>
+            <input type="text" class="innercontents" id="fname-input" placeholder="First Name" /><br />
+            <span>Last Name</span>
+            <input type="text" class="innercontents" id="lname-input" placeholder="Last Name" /><br />
+            <span>Phone</span>
+            <input type="text" class="innercontents" id="phone-input" placeholder="1234567890" /><br />
+            <span>Email</span>
+            <input type="text" class="innercontents" id="email-input" placeholder="mail@domain.com" /><br />
+            <button type="button" id="submit-button" onclick="">Submit</button>
+        </div>
+    </div>
 </body>
 
 </html>
