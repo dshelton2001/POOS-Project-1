@@ -146,12 +146,49 @@ function openUpdateContacts(rowIndex) {
     phoneInput.value = contact.Phone;
     emailInput.value = contact.Email;
     submitButton.innerHTML = 'Update';
-    submitButton.setAttribute('onclick', 'doUpdateContacts()');
+    submitButton.setAttribute('onclick', `doUpdateContacts(${rowIndex})`);
 }
 
-function doUpdateContacts() {
-    // TODO
-    console.log('doUpdateContacts() Not implemented');
+function doUpdateContacts(rowIndex) {
+    let contact = tableContacts[rowIndex];
+
+    let tmp = {
+        updatedFirst : firstNameInput.value,
+        updatedLast : lastNameInput.value,
+        updatedPhone : phoneInput.value,
+        updatedEmail : emailInput.value,
+        Id : contact.ID
+    };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = apiUrlBase + '/' + updateContactsEndpoint;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.error.length > 0 ) {
+                    console.log("Error when creating contact...");
+                    return;
+                }
+                
+                contact.FirstName = firstNameInput.value;
+                contact.LastName = lastNameInput.value;
+                contact.Phone = phoneInput.value;
+                contact.Email = emailInput.value;
+                tableContacts[rowIndex] = contact;
+                contactInfo.setAttribute("hidden", "");
+                populateContactsTable(tableContacts);
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log("Error: " + err);
+    }
 }
 
 function doDeleteContacts(rowIndex) {
