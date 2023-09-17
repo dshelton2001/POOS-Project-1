@@ -63,7 +63,7 @@ function doAddContacts() {
         lName : lastNameInput.value,
         phoneNum : phoneInput.value,
         emailAdd : emailInput.value,
-        userId : user.userId
+        userID : user.userId
     };
     let jsonPayload = JSON.stringify(tmp);
 
