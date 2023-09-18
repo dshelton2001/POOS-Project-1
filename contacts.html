@@ -43,25 +43,22 @@
         </div>
     </nav>
 
-    <form class="form-inline">
+    <div class="form-inline">
         <div class="form-row align-items-center">
             <div class="col-auto">
                 <label class="sr-only" for="search-input">Username</label>
                 <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                    <div class="input-group-text">Search</div>
-                    </div>
                     <input type="text" class="form-control" id="search-input" placeholder="John Doe" autocomplete="off">
                 </div>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2"><i class="fa-solid fa-magnifying-glass fa-sm" onclick="doSearchContacts()"></i> Submit</button>
+                <button type="submit" class="btn btn-primary mb-2" onclick="doSearchContacts()"><i class="fa-solid fa-magnifying-glass fa-sm"></i> Submit</button>
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-success mb-2" onclick="openAddContacts()"><i class="fa-solid fa-plus fa-sm"></i> Add</button>
             </div>
         </div>
-    </form>
+    </div>
 
     <table id="contacts-table" class="table table-dark table-striped table-hover">
         <thead>

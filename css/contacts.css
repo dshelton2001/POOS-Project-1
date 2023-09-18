@@ -5,7 +5,7 @@ body {
     background-size: cover;
 }
 
-form.form-inline {
+div.form-inline {
     margin: 25px auto;
     justify-content: center;
 }
