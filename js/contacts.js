@@ -28,13 +28,51 @@ let tableContacts = [];
 
 setUp();
 
+populateContactsTable([
+    {
+        "FirstName": "Fake2",
+        "LastName": "Human",
+        "Phone": "5672342648",
+        "Email": "test2@update2.com",
+        "ID": "1"
+    },
+    {
+        "FirstName": "Wacky",
+        "LastName": "Guy",
+        "Phone": "5555555555",
+        "Email": "wackyguy23@gmail.com",
+        "ID": "2"
+    },
+    {
+        "FirstName": "William",
+        "LastName": "Afton",
+        "Phone": "1112223333",
+        "Email": "fivenights@freddies.org",
+        "ID": "3"
+    },
+    {
+        "FirstName": "Sarah",
+        "LastName": "Sell",
+        "Phone": "9415559832",
+        "Email": "seashell@seashore.com",
+        "ID": "4"
+    },
+    {
+        "FirstName": "Walmart",
+        "LastName": "King",
+        "Phone": "0000000000",
+        "Email": "walmart@king.com",
+        "ID": "31"
+    }
+])
+
 function setUp() {
     user = readUserCookie();
 
     if (!doesUserExist(user)) {
         window.location.href = 'login.html';
     } else {
-        welcomeTitle.innerHTML = 'Welcome, ' + user.firstName + '!';
+        // welcomeTitle.innerHTML = 'Welcome, ' + user.firstName + '!';
     }
 }
 
@@ -133,8 +171,8 @@ function populateContactsTable(contacts) {
         row.insertCell(1).innerHTML = contact.LastName;
         row.insertCell(2).innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
         row.insertCell(3).innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
-        row.insertCell(4).innerHTML = `<button class="fa fa-edit" onclick="openUpdateContacts(${i})"></button>
-        <button class="fa fa-close" onclick="doDeleteContacts(${i})"></button>`;
+        row.insertCell(4).innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Edit</button>
+        <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Delete</button>`;
     }
 }
 
