@@ -28,44 +28,6 @@ let tableContacts = [];
 
 setUp();
 
-populateContactsTable([
-    {
-        "FirstName": "Fake2",
-        "LastName": "Human",
-        "Phone": "5672342648",
-        "Email": "test2@update2.com",
-        "ID": "1"
-    },
-    {
-        "FirstName": "Wacky",
-        "LastName": "Guy",
-        "Phone": "5555555555",
-        "Email": "wackyguy23@gmail.com",
-        "ID": "2"
-    },
-    {
-        "FirstName": "William",
-        "LastName": "Afton",
-        "Phone": "1112223333",
-        "Email": "fivenights@freddies.org",
-        "ID": "3"
-    },
-    {
-        "FirstName": "Sarah",
-        "LastName": "Sell",
-        "Phone": "9415559832",
-        "Email": "seashell@seashore.com",
-        "ID": "4"
-    },
-    {
-        "FirstName": "Walmart",
-        "LastName": "King",
-        "Phone": "0000000000",
-        "Email": "walmart@king.com",
-        "ID": "31"
-    }
-])
-
 function setUp() {
     user = readUserCookie();
 
@@ -74,6 +36,23 @@ function setUp() {
     } else {
         // welcomeTitle.innerHTML = 'Welcome, ' + user.firstName + '!';
     }
+}
+
+//! Internal/Testing use only. Be careful.
+function populateFakeContactsTable(num) {
+    let fakeContacts = [];
+
+    for (let i = 0; i < num; i++) {
+        fakeContacts.push({
+            "FirstName": `Fake${i}`,
+            "LastName": "Human",
+            "Phone": "1231231234",
+            "Email": `test${i}@update${i}.com`,
+            "ID": `${i}`
+        });
+    }
+
+    populateContactsTable(fakeContacts);
 }
 
 function doesUserExist(user) {
@@ -183,7 +162,7 @@ function openUpdateContacts(rowIndex) {
     lastNameInput.value = contact.LastName;
     phoneInput.value = contact.Phone;
     emailInput.value = contact.Email;
-    submitButton.innerHTML = 'Update';
+    submitButton.innerHTML = 'Save Changes';
     submitButton.setAttribute('onclick', `doUpdateContacts(${rowIndex})`);
 }
 
