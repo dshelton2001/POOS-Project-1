@@ -268,8 +268,31 @@ function doDeleteUser() {
         return;
     }
 
-    // TODO
-    console.log('doDeleteUser() Not implemented');
+    let tmp = { userID : user.userId };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = apiUrlBase + '/' + deleteUserEndpoint;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.error.length > 0 ) {
+                    console.log("Error when deleting user...");
+                    return;
+                }
+
+                doLogOut();
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log("Error: " + err);
+    }
 }
 
 searchInput.addEventListener('keypress', (e) => {
