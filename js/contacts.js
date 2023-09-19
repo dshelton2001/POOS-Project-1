@@ -28,6 +28,8 @@ let tableContacts = [];
 
 setUp();
 
+populateFakeContactsTable(100);
+
 function setUp() {
     user = readUserCookie();
 
@@ -151,29 +153,44 @@ function populateContactsTable(contacts) {
         row.insertCell(2).innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
         row.insertCell(3).innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
         row.insertCell(4).innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Edit</button>
-        <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Delete</button>`;
+        <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${i})"><i class="fa-solid fa-trash fa-sm"></i> Delete</button>`;
     }
 }
 
 function openUpdateContacts(rowIndex) {
     let contact = tableContacts[rowIndex];
-    contactInfo.removeAttribute('hidden');
-    firstNameInput.value = contact.FirstName;
-    lastNameInput.value = contact.LastName;
-    phoneInput.value = contact.Phone;
-    emailInput.value = contact.Email;
-    submitButton.innerHTML = 'Save Changes';
-    submitButton.setAttribute('onclick', `doUpdateContacts(${rowIndex})`);
+    let row = contactsTable.rows[rowIndex + 1];
+
+    row.cells[0].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.FirstName}" autocomplete="off">`;
+    row.cells[1].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.LastName}" autocomplete="off">`;
+    row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Phone}" autocomplete="off">`;
+    row.cells[3].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Email}" autocomplete="off">`;
+    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-success mb-2" onclick="doUpdateContacts(${rowIndex})"><i class="fa-solid fa-check fa-sm"></i> Save</button>
+    <button type="submit" class="btn btn-outline-danger mb-2" onclick="cancelUpdateContacts(${rowIndex})"><i class="fa-solid fa-x fa-sm"></i> Cancel</button>`;
+}
+
+function cancelUpdateContacts(rowIndex) {
+    let row = contactsTable.rows[rowIndex + 1];
+    let contact = tableContacts[rowIndex];
+    let phone = "(" + contact.Phone.substring(0, 3) + ")" + " " + contact.Phone.substring(3, 6) + "-" + contact.Phone.substring(6);
+
+    row.cells[0].innerHTML = contact.FirstName;
+    row.cells[1].innerHTML = contact.LastName;
+    row.cells[2].innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
+    row.cells[3].innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
+    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${rowIndex})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Edit</button>
+    <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${rowIndex})"><i class="fa-solid fa-trash fa-sm"></i> Delete</button>`;
 }
 
 function doUpdateContacts(rowIndex) {
+    let row = contactsTable.rows[rowIndex + 1];
     let contact = tableContacts[rowIndex];
 
     let tmp = {
-        updatedFirst : firstNameInput.value,
-        updatedLast : lastNameInput.value,
-        updatedPhone : phoneInput.value,
-        updatedEmail : emailInput.value,
+        updatedFirst : row.cells[0].firstChild.value,
+        updatedLast : row.cells[1].firstChild.value,
+        updatedPhone : row.cells[2].firstChild.value,
+        updatedEmail : row.cells[3].firstChild.value,
         Id : contact.ID
     };
     let jsonPayload = JSON.stringify(tmp);
@@ -193,12 +210,11 @@ function doUpdateContacts(rowIndex) {
                     return;
                 }
                 
-                contact.FirstName = firstNameInput.value;
-                contact.LastName = lastNameInput.value;
-                contact.Phone = phoneInput.value;
-                contact.Email = emailInput.value;
+                contact.FirstName = tmp.updatedFirst;
+                contact.LastName = tmp.updatedLast;
+                contact.Phone = tmp.updatedPhone;
+                contact.Email = tmp.updatedEmail;
                 tableContacts[rowIndex] = contact;
-                contactInfo.setAttribute("hidden", "");
                 populateContactsTable(tableContacts);
             }
         };
