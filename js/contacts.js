@@ -28,8 +28,6 @@ let tableContacts = [];
 
 setUp();
 
-populateFakeContactsTable(100);
-
 function setUp() {
     user = readUserCookie();
 
