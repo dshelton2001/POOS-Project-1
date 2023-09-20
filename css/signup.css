@@ -72,3 +72,14 @@ body {
 #ConfirmBtn:hover {
 	background-color: #F2EE9D;
 }
+
+#back2login:hover,
+#back2index:hover {
+	background-color: rgba(122, 157, 84, 0.8) !important;
+}
+
+.btn-primary {
+	background-color: white !important;
+	color: black !important;
+	border-color: black !important
+}
