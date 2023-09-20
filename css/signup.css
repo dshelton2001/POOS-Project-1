@@ -17,7 +17,8 @@ body {
 	margin-top: 150px;
 	padding-top: 20px;
 	padding-bottom: 27px;
-	background-color: #F2EE9D;
+	background-color: rgba(122, 157, 84, 0.8);
+	;
 	border-radius: 7px;
 	width: 27%;
 	max-width: 750px;

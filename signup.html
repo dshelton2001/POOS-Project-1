@@ -19,47 +19,32 @@
 	<div class="parentDiv">
 		<div class="userDetailsDiv" id="signUpInformation">
 			<h1 class="signupTitle">Sign up</h1>
-			<form id="myForm" class="needs-validation" novalidate>
-				<div class="form-floating mb-3 mt-3" id="firstDiv">
-					<input type="text" class="form-control" id="firstnameInput" placeholder="First Name" required>
-					<label for="firstnameInput">First Name</label>
-					<div class="invalid-feedback">
-						Please enter your first name.
-					</div>
-				</div>
-				<div class="form-floating mb-3 mt-3" id="lastDiv">
-					<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name" required>
-					<label for="lastnameInput">Last Name</label>
-					<div class="invalid-feedback">
-						Please enter your last name.
-					</div>
-				</div>
-				<div class="form-floating mb-3 mt-3" id="userDiv">
-					<input type="text" class="form-control" id="usernameInput" placeholder="Username" required>
-					<label for="usernameInput">Username</label>
-					<div class="invalid-feedback">
-						Please enter your username.
-					</div>
-				</div>
-				<div class="form-floating mb-3 mt-3" id="passDiv">
-					<input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
-					<label for="passwordInput">Password</label>
-					<div class="invalid-feedback">
-						Please enter your password.
-					</div>
-				</div>
-				<div class="form-floating mb-3 mt-3" id="conpassDiv">
-					<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password"
-						required>
-					<label for="confirmpasswordInput">Confirm Password</label>
-					<div class="invalid-feedback">
-						Please confirm password
-					</div>
-				</div>
-				<div id="buttondiv">
-					<button type="button" class="signupdetails" id="ConfirmBtn" onclick="checkInput();">Sign Up</button>
-				</div>
-			</form>
+			<div class="form-floating mb-3 mt-3" id="firstDiv">
+				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name">
+				<label for="firstnameInput">First Name</label>
+			</div>
+			<div class="form-floating mb-3 mt-3" id="lastDiv">
+				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name">
+				<label for="lastnameInput">Last Name</label>
+
+			</div>
+			<div class="form-floating mb-3 mt-3" id="userDiv">
+				<input type="text" class="form-control" id="usernameInput" placeholder="Username">
+				<label for="usernameInput">Username</label>
+
+			</div>
+			<div class="form-floating mb-3 mt-3" id="passDiv">
+				<input type="password" class="form-control" id="passwordInput" placeholder="Password">
+				<label for="passwordInput">Password</label>
+
+			</div>
+			<div class="form-floating mb-3 mt-3" id="conpassDiv">
+				<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password">
+				<label for="confirmpasswordInput">Confirm Password</label>
+			</div>
+			<div id="buttondiv">
+				<button type="button" class="signupdetails" id="ConfirmBtn" onclick="checkInput();">Sign Up</button>
+			</div>
 		</div>
 		<div id="errMsg">
 
