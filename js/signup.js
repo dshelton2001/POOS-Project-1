@@ -3,6 +3,7 @@ const firstnameInput = document.querySelector('#firstnameInput');
 const lastnameInput = document.querySelector('#lastnameInput');
 const usernameInput = document.querySelector('#usernameInput');
 const passwordInput = document.querySelector('#passwordInput');
+const confirmpasswordInput = document.querySelector('#confirmpasswordInput');
 const errMsg = document.querySelector('#errMsg');
 
 // Constant Variables
@@ -80,28 +81,72 @@ function findUser() {
 	}
 }
 
-function checkInput() {
+function createErrMsg() {
+	const div = document.createElement("div");
+	const target = document.getElementById("parentDiv");
+	const p4 = document.createElement("p");
+	const p5 = document.createElement("p");
+	const p1 = document.createElement("p");
+	const p2 = document.createElement("p");
+	const p3 = document.createElement("p");
+	p4.setAttribute("id", "p4");
+	p5.setAttribute("id", "p5");
+	p1.setAttribute("id", "p1");
+	p2.setAttribute("id", "p2");
+	p3.setAttribute("id", "p3");
+	p4.textContent = "Make sure all boxes are filled";
+	p5.textContent = "Can't use special characters for first and last name";
+	p1.textContent = "Password must have special character";
+	p2.textContent = "Password must have at least 8 characters";
+	p3.textContent = "Passwords must match";
+	div.setAttribute("id", "test1");
+	target.appendChild(div);
+	div.appendChild(p4);
+	div.appendChild(p5);
+	div.appendChild(p1);
+	div.appendChild(p2);
+	div.appendChild(p3);
+	checkInput();
+}
 
+function checkInput() {
 	// Validate Empty Fields
 	if (firstnameInput.value == "" || lastnameInput.value == "" ||
-		usernameInput.value == "" || passwordInput.value == "") {
-		errMsg.innerHTML = 'Please fill all boxes';
-		return;
+		usernameInput.value == "" || passwordInput.value == "" ||
+		confirmpasswordInput.value == "") {
+		document.getElementById("p4").style.color = "red";
+	} else {
+		document.getElementById("p4").style.color = "green";
 	}
 
 	// Validate First or Last contain no special chars.
-	if (checkSpecialCharacters(firstnameInput.value) || checkSpecialCharacters(lastnameInput.value)) {
-		errMsg.innerHTML = 'You are not allowed to use special characters in your first or last name.';
-		return;
+	if (checkSpecialCharacters(firstnameInput.value) || checkSpecialCharacters(lastnameInput.value)
+		|| firstnameInput.value == "" || lastnameInput.value == "") {
+		document.getElementById("p5").style.color = "red";
+	} else {
+		document.getElementById("p5").style.color = "green";
 	}
 
 	// Validate password strength
 	if (checkPasswordStrength(passwordInput.value) != true) {
-		errMsg.innerHTML = 'Your password must contain 1 special character and be at least 8 characters.';
-		return;
+		document.getElementById("p2").style.color = "red";
+	} else {
+		document.getElementById("p2").style.color = "green";
 	}
 
-	doSignUp();
+	if (checkSpecialCharacters(passwordInput.value) != true) {
+		document.getElementById("p1").style.color = "red";
+	} else {
+		document.getElementById("p1").style.color = "green";
+	}
+
+	if (confirmpasswordInput.value != passwordInput.value || passwordInput.value == "") {
+		document.getElementById("p3").style.color = "red";
+	} else {
+		document.getElementById("p3").style.color = "green";
+	}
+
+	//doSignUp();
 }
 
 function checkSpecialCharacters(str) {
@@ -116,5 +161,5 @@ function checkExistingUsername(str) {
 function checkPasswordStrength(str) {
 	if (str.length < 8)
 		return false;
-	return checkSpecialCharacters(str);
+	return true;
 }

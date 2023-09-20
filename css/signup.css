@@ -14,7 +14,8 @@ body {
 #userDetailsDiv {
 	display: grid;
 	place-items: center;
-	margin-top: 150px;
+	position: absolute;
+	top: 145px;
 	padding-top: 20px;
 	padding-bottom: 27px;
 	background-color: rgba(122, 157, 84, 0.8);
@@ -22,6 +23,16 @@ body {
 	width: 27%;
 	max-width: 750px;
 	box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+#test1 {
+	background-color: #F2EE9D;
+	border-radius: 7px;
+	color: black;
+	padding: 10px 10px 10px 10px;
+	position: relative;
+	left: 470px;
+	top: 176px;
 }
 
 .signupTitle {
@@ -44,7 +55,7 @@ body {
 	bottom: 20px;
 }
 
-#buttondiv {
+.form-floating #buttondiv {
 	display: flex;
 	align-items: center;
 	justify-content: center;
