@@ -1,7 +1,7 @@
 <?php
 
     $inData = getRequestInfo();
-    $userName = $inData["userName"];
+    $userID= $inData["userID"];
     #$pwd = $inData["pwd"]; <---- will this be needed for Front End Checking?
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -11,10 +11,18 @@
 	}
     else
     {
-        $stmt = $conn->prepare("DELETE FROM Users WHERE Username=?");
-		$stmt->bind_param("s",$userName);
+        # delete the user
+        $stmt = $conn->prepare("DELETE FROM Users WHERE ID=?");
+		$stmt->bind_param("s",$userID);
 		$stmt->execute();
 		$stmt->close();
+
+		# look for the old contacts associated with the user
+		$stco = $conn->prepare("DELETE FROM Contacts WHERE UserID=?");
+		$stco->bind_param("s",$userID);
+		$stco->execute();
+
+		$stco->close();
 		$conn->close();
 		returnWithError("");
     } 

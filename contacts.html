@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>Contact Manager</title>
+    <title>Contacts</title>
 
     <!-- CSS & Bootstrap -->
     <link href="css/contacts.css" rel="stylesheet" />
@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
             <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Leaf logo" >
-            Contact Manager
+            Vyne
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,29 +52,31 @@
                 </div>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2" onclick="doSearchContacts()"><i class="fa-solid fa-magnifying-glass fa-sm"></i> Submit</button>
+                <button type="submit" class="btn btn-primary mb-2" onclick="doSearchContacts()"><i class="fa-solid fa-magnifying-glass fa-sm"></i> Search</button>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-success mb-2" onclick="openAddContacts()"><i class="fa-solid fa-plus fa-sm"></i> Add</button>
+                <button type="submit" class="btn btn-success mb-2" onclick="openAddContacts()"><i class="fa-solid fa-user-plus fa-sm"></i> Add</button>
             </div>
         </div>
     </div>
 
-    <table id="contacts-table" class="table table-dark table-striped table-hover">
-        <thead>
-            <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Email</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody id="contacts-table-body">
-            <tr>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-wrap">
+        <table id="contacts-table" class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody id="contacts-table-body">
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div id="contact-info" hidden>
         <div class="container">

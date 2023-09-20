@@ -88,12 +88,45 @@ function findUser () {
 		}
 }
 
-function checkEmptyInput () {
+function checkInput () {
+
+	// Validate Empty Fields
 	if(firstnameInput.value == "" || lastnameInput.value == "" ||
 	   usernameInput.value == "" || passwordInput.value == "") 
 	   {
 		errMsg.innerHTML = 'Please fill all boxes';
 		return;
 	   }
-	   doSignUp();
+
+	// Validate First or Last contain no special chars.
+	if (checkSpecialCharacters(firstnameInput.value) || checkSpecialCharacters(lastnameInput.value))
+	{
+		errMsg.innerHTML = 'You are not allowed to use special characters in your first or last name.';
+		return;
+	}
+
+	// Validate password strength
+	if (checkPasswordStrength(passwordInput.value) != true)
+	{
+		errMsg.innerHTML = 'Your password must contain 1 special character and be at least 8 characters.';
+		return;
+	}
+
+	doSignUp();	
+}
+
+function checkSpecialCharacters(str) {
+	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};:\\|,.<>\/?~]/;
+	return specialChars.test(str);
+}
+
+function checkExistingUsername(str) {
+	
+}
+
+function checkPasswordStrength(str)
+{
+	if (str.length < 8)
+		return false;
+	return checkSpecialCharacters(str);
 }

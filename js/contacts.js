@@ -9,7 +9,6 @@ const lastNameInput = document.querySelector('#lname-input');
 const phoneInput = document.querySelector('#phone-input');
 const emailInput = document.querySelector('#email-input');
 const submitButton = document.querySelector('#submit-button');
-
 // Constant Variables
 const HttpStatus = { success: 200 };
 const XhrReadyState = { done: 4 };
@@ -28,44 +27,6 @@ let tableContacts = [];
 
 setUp();
 
-populateContactsTable([
-    {
-        "FirstName": "Fake2",
-        "LastName": "Human",
-        "Phone": "5672342648",
-        "Email": "test2@update2.com",
-        "ID": "1"
-    },
-    {
-        "FirstName": "Wacky",
-        "LastName": "Guy",
-        "Phone": "5555555555",
-        "Email": "wackyguy23@gmail.com",
-        "ID": "2"
-    },
-    {
-        "FirstName": "William",
-        "LastName": "Afton",
-        "Phone": "1112223333",
-        "Email": "fivenights@freddies.org",
-        "ID": "3"
-    },
-    {
-        "FirstName": "Sarah",
-        "LastName": "Sell",
-        "Phone": "9415559832",
-        "Email": "seashell@seashore.com",
-        "ID": "4"
-    },
-    {
-        "FirstName": "Walmart",
-        "LastName": "King",
-        "Phone": "0000000000",
-        "Email": "walmart@king.com",
-        "ID": "31"
-    }
-])
-
 function setUp() {
     user = readUserCookie();
 
@@ -74,6 +35,23 @@ function setUp() {
     } else {
         // welcomeTitle.innerHTML = 'Welcome, ' + user.firstName + '!';
     }
+}
+
+//! Internal/Testing use only. Be careful.
+function populateFakeContactsTable(num) {
+    let fakeContacts = [];
+
+    for (let i = 0; i < num; i++) {
+        fakeContacts.push({
+            "FirstName": `Fake${i}`,
+            "LastName": "Human",
+            "Phone": "1231231234",
+            "Email": `test${i}@update${i}.com`,
+            "ID": `${i}`
+        });
+    }
+
+    populateContactsTable(fakeContacts);
 }
 
 function doesUserExist(user) {
@@ -103,7 +81,10 @@ function doAddContacts() {
         emailAdd : emailInput.value,
         userID : user.userId
     };
+
     let jsonPayload = JSON.stringify(tmp);
+
+    checkInput();
 
     let url = apiUrlBase + '/' + addContactsEndpoint;
 
@@ -159,6 +140,43 @@ function doSearchContacts() {
     }
 }
 
+//validate contact input
+function checkInput () {
+
+    let tmp = {
+        fName : firstNameInput.value,
+        lName : lastNameInput.value,
+        phoneNum : phoneInput.value,
+        emailAdd : emailInput.value,
+        userID : user.userId
+    };
+
+	// Validate Empty Fields
+	if(tmp.fName == "" || tmp.lName == "" || tmp.phoneNum == "" || tmp.emailAdd == "") 
+	   {
+		console.log('Please add all the proper contact information');
+		return;
+	   }
+
+	// Validate First or Last contain no special chars.
+	if (checkSpecialCharacters(tmp.fName) || checkSpecialCharacters(tmp.lName))
+	{
+		console.log('You are not allowed to use special characters in a contacts first or last name.');
+		return;
+	}
+
+    if(checkSpecialCharacters(tmp.phoneNum)){
+        console.log('You are not allowed to use special characters in a contacts phone number.');
+		return;
+    }
+
+    if(tmp.phoneNum.length < 10){
+        console.log('Please enter a valid phone number.');
+		return;
+    }
+
+}
+
 function populateContactsTable(contacts) {
     contactsTable.innerHTML = `<tr></tr>`;
     tableContacts = contacts;
@@ -172,29 +190,44 @@ function populateContactsTable(contacts) {
         row.insertCell(2).innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
         row.insertCell(3).innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
         row.insertCell(4).innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Edit</button>
-        <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Delete</button>`;
+        <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${i})"><i class="fa-solid fa-trash fa-sm"></i> Delete</button>`;
     }
 }
 
 function openUpdateContacts(rowIndex) {
     let contact = tableContacts[rowIndex];
-    contactInfo.removeAttribute('hidden');
-    firstNameInput.value = contact.FirstName;
-    lastNameInput.value = contact.LastName;
-    phoneInput.value = contact.Phone;
-    emailInput.value = contact.Email;
-    submitButton.innerHTML = 'Update';
-    submitButton.setAttribute('onclick', `doUpdateContacts(${rowIndex})`);
+    let row = contactsTable.rows[rowIndex + 1];
+
+    row.cells[0].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.FirstName}" autocomplete="off">`;
+    row.cells[1].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.LastName}" autocomplete="off">`;
+    row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Phone}" autocomplete="off">`;
+    row.cells[3].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Email}" autocomplete="off">`;
+    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-success mb-2" onclick="doUpdateContacts(${rowIndex})"><i class="fa-solid fa-check fa-sm"></i> Save</button>
+    <button type="submit" class="btn btn-outline-danger mb-2" onclick="cancelUpdateContacts(${rowIndex})"><i class="fa-solid fa-x fa-sm"></i> Cancel</button>`;
+}
+
+function cancelUpdateContacts(rowIndex) {
+    let row = contactsTable.rows[rowIndex + 1];
+    let contact = tableContacts[rowIndex];
+    let phone = "(" + contact.Phone.substring(0, 3) + ")" + " " + contact.Phone.substring(3, 6) + "-" + contact.Phone.substring(6);
+
+    row.cells[0].innerHTML = contact.FirstName;
+    row.cells[1].innerHTML = contact.LastName;
+    row.cells[2].innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
+    row.cells[3].innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
+    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${rowIndex})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Edit</button>
+    <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${rowIndex})"><i class="fa-solid fa-trash fa-sm"></i> Delete</button>`;
 }
 
 function doUpdateContacts(rowIndex) {
+    let row = contactsTable.rows[rowIndex + 1];
     let contact = tableContacts[rowIndex];
 
     let tmp = {
-        updatedFirst : firstNameInput.value,
-        updatedLast : lastNameInput.value,
-        updatedPhone : phoneInput.value,
-        updatedEmail : emailInput.value,
+        updatedFirst : row.cells[0].firstChild.value,
+        updatedLast : row.cells[1].firstChild.value,
+        updatedPhone : row.cells[2].firstChild.value,
+        updatedEmail : row.cells[3].firstChild.value,
         Id : contact.ID
     };
     let jsonPayload = JSON.stringify(tmp);
@@ -214,12 +247,11 @@ function doUpdateContacts(rowIndex) {
                     return;
                 }
                 
-                contact.FirstName = firstNameInput.value;
-                contact.LastName = lastNameInput.value;
-                contact.Phone = phoneInput.value;
-                contact.Email = emailInput.value;
+                contact.FirstName = tmp.updatedFirst;
+                contact.LastName = tmp.updatedLast;
+                contact.Phone = tmp.updatedPhone;
+                contact.Email = tmp.updatedEmail;
                 tableContacts[rowIndex] = contact;
-                contactInfo.setAttribute("hidden", "");
                 populateContactsTable(tableContacts);
             }
         };
@@ -275,8 +307,36 @@ function doDeleteUser() {
         return;
     }
 
-    // TODO
-    console.log('doDeleteUser() Not implemented');
+    let tmp = { userID : user.userId };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = apiUrlBase + '/' + deleteUserEndpoint;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.error.length > 0 ) {
+                    console.log("Error when deleting user...");
+                    return;
+                }
+
+                doLogOut();
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log("Error: " + err);
+    }
+}
+
+function checkSpecialCharacters(str) {
+	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};:\\|,.<>\/?~]/;
+	return specialChars.test(str);
 }
 
 searchInput.addEventListener('keypress', (e) => {
