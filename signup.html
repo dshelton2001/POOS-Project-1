@@ -16,8 +16,8 @@
 
 <body>
 	<a href="login.html"><button id="cancelBtn">Cancel</button></a>
-	<div class="parentDiv">
-		<div class="userDetailsDiv" id="signUpInformation">
+	<div id="parentDiv">
+		<div id="userDetailsDiv">
 			<h1 class="signupTitle">Sign up</h1>
 			<div class="form-floating mb-3 mt-3" id="firstDiv">
 				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name">
@@ -26,17 +26,14 @@
 			<div class="form-floating mb-3 mt-3" id="lastDiv">
 				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name">
 				<label for="lastnameInput">Last Name</label>
-
 			</div>
 			<div class="form-floating mb-3 mt-3" id="userDiv">
 				<input type="text" class="form-control" id="usernameInput" placeholder="Username">
 				<label for="usernameInput">Username</label>
-
 			</div>
 			<div class="form-floating mb-3 mt-3" id="passDiv">
 				<input type="password" class="form-control" id="passwordInput" placeholder="Password">
 				<label for="passwordInput">Password</label>
-
 			</div>
 			<div class="form-floating mb-3 mt-3" id="conpassDiv">
 				<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password">
@@ -45,9 +42,6 @@
 			<div id="buttondiv">
 				<button type="button" class="signupdetails" id="ConfirmBtn" onclick="checkInput();">Sign Up</button>
 			</div>
-		</div>
-		<div id="errMsg">
-
 		</div>
 	</div>
 </body>
