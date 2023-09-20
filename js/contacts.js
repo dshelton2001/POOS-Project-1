@@ -9,7 +9,6 @@ const lastNameInput = document.querySelector('#lname-input');
 const phoneInput = document.querySelector('#phone-input');
 const emailInput = document.querySelector('#email-input');
 const submitButton = document.querySelector('#submit-button');
-
 // Constant Variables
 const HttpStatus = { success: 200 };
 const XhrReadyState = { done: 4 };
@@ -82,7 +81,10 @@ function doAddContacts() {
         emailAdd : emailInput.value,
         userID : user.userId
     };
+
     let jsonPayload = JSON.stringify(tmp);
+
+    checkInput();
 
     let url = apiUrlBase + '/' + addContactsEndpoint;
 
@@ -136,6 +138,43 @@ function doSearchContacts() {
     } catch (err) {
         console.log("Error: " + err);
     }
+}
+
+//validate contact input
+function checkInput () {
+
+    let tmp = {
+        fName : firstNameInput.value,
+        lName : lastNameInput.value,
+        phoneNum : phoneInput.value,
+        emailAdd : emailInput.value,
+        userID : user.userId
+    };
+
+	// Validate Empty Fields
+	if(tmp.fName == "" || tmp.lName == "" || tmp.phoneNum == "" || tmp.emailAdd == "") 
+	   {
+		console.log('Please add all the proper contact information');
+		return;
+	   }
+
+	// Validate First or Last contain no special chars.
+	if (checkSpecialCharacters(tmp.fName) || checkSpecialCharacters(tmp.lName))
+	{
+		console.log('You are not allowed to use special characters in a contacts first or last name.');
+		return;
+	}
+
+    if(checkSpecialCharacters(tmp.phoneNum)){
+        console.log('You are not allowed to use special characters in a contacts phone number.');
+		return;
+    }
+
+    if(tmp.phoneNum.length < 10){
+        console.log('Please enter a valid phone number.');
+		return;
+    }
+
 }
 
 function populateContactsTable(contacts) {
@@ -293,6 +332,11 @@ function doDeleteUser() {
     } catch (err) {
         console.log("Error: " + err);
     }
+}
+
+function checkSpecialCharacters(str) {
+	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};:\\|,.<>\/?~]/;
+	return specialChars.test(str);
 }
 
 searchInput.addEventListener('keypress', (e) => {
