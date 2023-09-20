@@ -5,70 +5,70 @@
 }
 
 body {
-    background-image: url(../images/background.jpg);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+	background-image: url(../images/background.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .userDetailsDiv {
+	display: grid;
+	place-items: center;
 	margin-top: 150px;
 	padding-top: 20px;
 	padding-bottom: 27px;
-	background-color: rgba(122, 157, 84, 0.8);
+	background-color: #F2EE9D;
 	border-radius: 7px;
-	width: 75%;
+	width: 27%;
 	max-width: 750px;
 	box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
 }
 
 .signupTitle {
 	text-align: center;
-	position:relative; bottom:20px;
+	position: relative;
+	bottom: 20px;
 }
 
 .inputTitle {
 	display: inline;
 }
 
-.userDiv {
+#userDiv,
+#firstDiv,
+#lastDiv,
+#passDiv,
+#conpassDiv {
 	margin-top: 5px;
-	text-align: center;
-	position:relative; bottom:20px;
-}
-
-.inputBox {
-	width: 40%;
-	height: 40px;
-	border-radius: 10px;
-	border: none;
-	font-size: 23px;
-	margin-bottom: 10px;
+	width: 70%;
+	bottom: 20px;
 }
 
 #buttondiv {
 	display: flex;
-    align-items: center;
-    justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
 
 #errMsg {
-	color: #8C3333;
-    font-size: 25px;
+	background-color: #8C3333;
+	color: white;
+	font-size: 25px;
 }
 
 #ConfirmBtn {
 	display: flex;
-	position:relative; top:20px;
+	position: relative;
+	top: 0px;
 	padding: 10px 20px 10px 20px;
 	border-radius: 7px;
 	cursor: pointer;
 	border-color: rgba(0, 0, 0, 0.25);
-    border-style: solid;
-    border-width: 0.1px;
+	border-style: solid;
+	border-width: 0.1px;
 	font-size: 19px;
 }
 
 #ConfirmBtn:hover {
-    background-color: #F2EE9D;
+	background-color: #F2EE9D;
 }
