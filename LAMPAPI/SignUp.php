@@ -16,8 +16,19 @@
 	{
 		$stmt = $conn->prepare("INSERT into Users (FirstName, LastName, Username, Password) VALUES(?,?,?,?)");
 		$stmt->bind_param("ssss", $fName, $lName, $userName, $pwd);
+
+		$check = $conn->prepare("SELECT COUNT(*) FROM Users WHERE Username = ? AND Password = ?");
+		$check->bind_param("s", $userName);
+		$check->execute();
+
+		//make if statement 
+		if($check == 1){
+			returnWithError("That username already exists.");
+		}
+
 		$stmt->execute();
 		$stmt->close();
+		$check->close();
 		$conn->close();
 		returnWithError("");
 	}
