@@ -24,6 +24,8 @@
 		//make if statement 
 		if($check == 1){
 			returnWithError("That username already exists.");
+			$check->close();
+			$conn->close();
 		}
 
 		$stmt->execute();
