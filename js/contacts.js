@@ -152,7 +152,7 @@ function checkInput () {
     };
 
 	// Validate Empty Fields
-	if(tmp.fName == "" || tmp.lName == "" || tmp.phoneNum == "" || tmp.emailAdd == "") 
+	if(tmp.fName == "" || tmp.lName == "" || tmp.phoneNum == "") 
 	   {
 		console.log('Please add all the proper contact information');
 		return;
@@ -161,16 +161,16 @@ function checkInput () {
 	// Validate First or Last contain no special chars.
 	if (checkSpecialCharacters(tmp.fName) || checkSpecialCharacters(tmp.lName))
 	{
-		console.log('You are not allowed to use special characters in a contacts first or last name.');
+		console.log('You are not allowed to use special characters in a first or last name.');
 		return;
 	}
 
     if(checkSpecialCharacters(tmp.phoneNum)){
-        console.log('You are not allowed to use special characters in a contacts phone number.');
+        console.log('You are not allowed to use special characters in a phone number.');
 		return;
     }
 
-    if(tmp.phoneNum.length < 10){
+    if(tmp.phoneNum.length != 10){
         console.log('Please enter a valid phone number.');
 		return;
     }
