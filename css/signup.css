@@ -19,23 +19,28 @@ body {
 	padding-top: 20px;
 	padding-bottom: 27px;
 	background-color: rgba(122, 157, 84, 0.8);
-	border-radius: 7px;
 	width: 27%;
 	max-width: 750px;
 	box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
 }
 
-#test1 {
-	background-color: #F2EE9D;
+#errDiv {
+	background-color: white;
+	border-color: black;
+	border-style: solid;
+	border-width: 5px;
 	border-radius: 7px;
 	color: black;
 	padding: 10px 10px 10px 10px;
 	position: relative;
-	left: 470px;
+	left: 415px;
 	top: 176px;
 }
 
 .signupTitle {
+	position: relative;
+	top: 1px;
+	color: black;
 	text-align: center;
 	position: relative;
 	bottom: 20px;
@@ -50,9 +55,16 @@ body {
 #lastDiv,
 #passDiv,
 #conpassDiv {
-	margin-top: 5px;
 	width: 70%;
-	bottom: 20px;
+}
+
+#p1,
+#p2,
+#p3,
+#p4,
+#p5 {
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 .form-floating #buttondiv {
@@ -78,6 +90,7 @@ body {
 	border-style: solid;
 	border-width: 0.1px;
 	font-size: 19px;
+	transition-duration: 0.4s;
 }
 
 #ConfirmBtn:hover {

@@ -81,6 +81,16 @@ function findUser() {
 	}
 }
 
+var display = false;
+
+function displayMsg() {
+	console.log(display);
+	if(display == false) {
+		createErrMsg();
+		display = true;
+	}
+}
+
 function createErrMsg() {
 	const div = document.createElement("div");
 	const target = document.getElementById("parentDiv");
@@ -99,7 +109,7 @@ function createErrMsg() {
 	p1.textContent = "Password must have special character";
 	p2.textContent = "Password must have at least 8 characters";
 	p3.textContent = "Passwords must match";
-	div.setAttribute("id", "test1");
+	div.setAttribute("id", "errDiv");
 	target.appendChild(div);
 	div.appendChild(p4);
 	div.appendChild(p5);

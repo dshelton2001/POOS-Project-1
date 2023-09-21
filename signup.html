@@ -16,54 +16,40 @@
 </head>
 
 <body>
-	<div class="btn-group">
-		<a href="login.html"><button class="btn btn-primary" id="back2login">Login Page</button></a>
-		<a href="index.html"><button class="btn btn-primary" id="back2index">Welcome Page</button></a>
-	</div>
 	<div id="parentDiv">
-		<div id="userDetailsDiv">
-			<h1 class="signupTitle">Sign up</h1>
-			<div class="form-floating mb-3 mt-3" id="firstDiv">
+		<div class="rounded" id="userDetailsDiv">
+			<h1 class="signupTitle fw-bolder">Sign up</h1>
+			<div class="form-floating mb-auto mt-2" id="firstDiv">
 				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name"
-					onclick="createErrMsg(); this.onclick=null;" onkeyup="checkInput();">
+					onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="firstnameInput">First Name</label>
 			</div>
-			<div class="form-floating mb-3 mt-3" id="lastDiv">
+			<div class="form-floating mb-auto mt-3" id="lastDiv">
 				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name"
-					onkeyup="checkInput();">
+				onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="lastnameInput">Last Name</label>
 			</div>
-			<div class="form-floating mb-3 mt-3" id="userDiv">
+			<div class="form-floating mb-auto mt-3" id="userDiv">
 				<input type="text" class="form-control" id="usernameInput" placeholder="Username"
-					onkeyup="checkInput();">
+				onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="usernameInput">Username</label>
 			</div>
-			<div class="form-floating mb-3 mt-3" id="passDiv">
+			<div class="form-floating mb-auto mt-3" id="passDiv">
 				<input type="password" class="form-control" id="passwordInput" placeholder="Password"
-					onkeyup="checkInput();">
+				onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="passwordInput">Password</label>
 			</div>
-			<div class="form-floating mb-3 mt-3" id="conpassDiv">
+			<div class="form-floating mb-auto mt-3" id="conpassDiv">
 				<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password"
-					onkeyup="checkInput();">
+				onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="confirmpasswordInput">Confirm Password</label>
 			</div>
 			<div id="buttondiv">
-				<button type="submit" class="signupdetails" id="ConfirmBtn" onclick="checkInput();">Sign Up</button>
+				<button class="btn-default mt-3" id="ConfirmBtn" onclick="checkInput();">Sign Up</button>
 			</div>
+			Already have an account<a href="login.html"> Sign Up</a>
 		</div>
 	</div>
-
-	<script>
-		// Add event listener to the form's submit event
-		document.getElementById("myForm").addEventListener("submit", function (event) {
-			event.preventDefault(); // Prevent form submission if validation fails
-			if (this.checkValidity() === false) {
-				event.stopPropagation(); // Stop the event from propagating further
-			}
-			this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
-		}, false);
-	</script>
 </body>
 
 </html>
