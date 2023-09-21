@@ -67,7 +67,7 @@ function findUser() {
 
 				for (let i = 0; i < jsonObject.results.length; i++) {
 					if (jsonObject.results[i].value == srch) {
-						errMsg.innerHTML = 'Invalid Username';
+						// add error msg to error box
 						return;
 					}
 				}
@@ -120,43 +120,61 @@ function createErrMsg() {
 }
 
 function checkInput() {
+	var nonempty;
+	var sc1;
+	var passLen;
+	var passSc;
+	var passMatch;
+
 	// Validate Empty Fields
 	if (firstnameInput.value == "" || lastnameInput.value == "" ||
 		usernameInput.value == "" || passwordInput.value == "" ||
 		confirmpasswordInput.value == "") {
 		document.getElementById("p4").style.color = "red";
+		nonempty = false;
 	} else {
 		document.getElementById("p4").style.color = "green";
+		nonempty = true;
 	}
 
 	// Validate First or Last contain no special chars.
 	if (checkSpecialCharacters(firstnameInput.value) || checkSpecialCharacters(lastnameInput.value)
 		|| firstnameInput.value == "" || lastnameInput.value == "") {
 		document.getElementById("p5").style.color = "red";
+		sc1 = false;
 	} else {
 		document.getElementById("p5").style.color = "green";
+		sc1 = true;
 	}
 
 	// Validate password strength
 	if (checkPasswordStrength(passwordInput.value) != true) {
 		document.getElementById("p2").style.color = "red";
+		passLen = false;
 	} else {
 		document.getElementById("p2").style.color = "green";
+		passLen = true;
 	}
 
 	if (checkSpecialCharacters(passwordInput.value) != true) {
 		document.getElementById("p1").style.color = "red";
+		passSc = false;
 	} else {
 		document.getElementById("p1").style.color = "green";
+		passSc = true;
 	}
 
 	if (confirmpasswordInput.value != passwordInput.value || passwordInput.value == "") {
 		document.getElementById("p3").style.color = "red";
+		passMatch = false;
 	} else {
 		document.getElementById("p3").style.color = "green";
+		passMatch = true;
 	}
 
-	//doSignUp();
+	if (nonempty && sc1 && passLen && passSc && passMatch) {
+		//findUser();
+	}
 }
 
 function checkSpecialCharacters(str) {
