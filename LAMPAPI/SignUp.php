@@ -18,6 +18,7 @@
 		$check->bind_param("s", $userName);
 		$check->execute();
 		$check->bind_result($res);
+		$check->fetch();
 
 		//make if statement 
 		if($res == 1){
