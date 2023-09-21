@@ -1,8 +1,7 @@
 // login.html Elements
-const usernameInput = document.querySelector('#usernameInput');
-const passwordInput = document.querySelector('#passwordInput');
-const loginButton = document.querySelector('#loginButton');
-const loginResultText = document.querySelector('#loginResultText');
+const usernameInput = document.querySelector('#username-input');
+const passwordInput = document.querySelector('#password-input');
+const contactsLink = document.querySelector('#contacts-link');
 
 // Constant Variables
 const HttpStatus = { success : 200 };
@@ -11,6 +10,19 @@ const apiUrlBase = 'http://cop433112.com/LAMPAPI';
 
 // Backend Endpoints
 const loginEndpoint = 'Login.php'
+
+setUp();
+
+function setUp() {
+    let user = readUserCookie();
+
+    if (user == null) {
+        contactsLink.classList.add('disabled');
+        contactsLink.removeAttribute('href');
+    } else {
+        window.location.href = "contacts.html";
+    }
+}
 
 function doLogin() {
     let username = usernameInput.value;
@@ -31,9 +43,12 @@ function doLogin() {
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 if (jsonObject.id < 1) {
-                    loginResultText.innerHTML = 'Invalid username or password';
+                    usernameInput.classList.add("is-invalid");
+                    passwordInput.classList.add("is-invalid");
                     return;
                 }
+                usernameInput.classList.add("is-valid");
+                passwordInput.classList.add("is-valid");
 
                 saveUserCookie(jsonObject.id, jsonObject.firstName, jsonObject.lastName);
                 window.location.href = 'contacts.html';
@@ -41,7 +56,7 @@ function doLogin() {
         };
         xhr.send(jsonPayload);
     } catch (err) {
-        loginResultText.innerHTML = err.message;
+        console.log("Error: " + err.message);
     }
 }
 

@@ -1,8 +1,42 @@
 body {
-    background-image: url(../images/background.jpg);
+    background-image: url(../images/blurryHouseBackground.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.bg {
+    color: white;
+    background: linear-gradient(to bottom, rgba(50, 56, 62, 0.5), 50%, rgba(50, 56, 62, 0));
+}
+
+.bg-settings {
+    background: none;
+    color: white
+}
+
+button.bg-settings:focus {
+    box-shadow: 0 0 0 0.2rem rgba(50, 56, 52,.25);
+}
+
+div.bg-dropdown {
+    color: white;
+    background: #32383e;
+}
+
+div.bg-dropdown > a {
+    color: white;
+}
+
+div.bg-dropdown > a:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bg-settings:hover {
+    border-style: solid;
+    border-color:rgba(50, 56, 62, .5);
+    color: white
 }
 
 div.form-inline {
@@ -15,13 +49,19 @@ div.form-inline {
     max-height: 75vh;
     overflow: auto;
     margin: 0px auto;
+    border-radius: 10px 13px 13px 10px;
+    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+table {
+    border-radius: 25px 0 0 25px;
 }
 
 thead {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: #32383e;
+    background-color: #272c30;
 }
 
 table a {
@@ -30,7 +70,22 @@ table a {
 }
 
 table a:hover {
+    color: #79c255;
     text-decoration: underline;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #4a5157;
+}
+
+.table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even)>th {
+    background-color: #32383e;
+}
+
+#contacts-table {
+    margin: 0;
 }
 
 #contact-info {
@@ -96,14 +151,15 @@ table a:hover {
 
 /* Track */
 .table-wrap::-webkit-scrollbar-track {
-    /* display: none; */
     background: #32383e;
+    border-radius: 0px 25px 25px 0;
+    
 }
 
 /* Handle */
 .table-wrap::-webkit-scrollbar-thumb {
-    border-radius:25px;
     background: rgba(252, 255, 242, 0.7);
+    border-radius: 0px 25px 25px 0;
 }
 
 /* Handle on hover */
