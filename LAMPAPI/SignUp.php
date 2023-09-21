@@ -17,9 +17,10 @@
 		$check = $conn->prepare("SELECT COUNT(*) FROM Users WHERE Username = ?");
 		$check->bind_param("s", $userName);
 		$check->execute();
+		$check->bind_result($res);
 
 		//make if statement 
-		if($check == 1){
+		if($res == 1){
 			returnWithError("That username already exists.");
 			$check->close();
 			$conn->close();
