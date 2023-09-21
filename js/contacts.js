@@ -189,8 +189,8 @@ function populateContactsTable(contacts) {
         row.insertCell(1).innerHTML = contact.LastName;
         row.insertCell(2).innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
         row.insertCell(3).innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
-        row.insertCell(4).innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Edit</button>
-        <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${i})"><i class="fa-solid fa-trash fa-sm"></i> Delete</button>`;
+        row.insertCell(4).innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${i})"><i class="fa-solid fa-pen-to-square fa-sm"></i></button>
+        <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${i})"><i class="fa-solid fa-trash fa-sm"></i></button>`;
     }
 }
 
@@ -202,8 +202,8 @@ function openUpdateContacts(rowIndex) {
     row.cells[1].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.LastName}" autocomplete="off">`;
     row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Phone}" autocomplete="off">`;
     row.cells[3].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Email}" autocomplete="off">`;
-    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-success mb-2" onclick="doUpdateContacts(${rowIndex})"><i class="fa-solid fa-check fa-sm"></i> Save</button>
-    <button type="submit" class="btn btn-outline-danger mb-2" onclick="cancelUpdateContacts(${rowIndex})"><i class="fa-solid fa-x fa-sm"></i> Cancel</button>`;
+    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-success mb-2" onclick="doUpdateContacts(${rowIndex})"><i class="fa-solid fa-check fa-sm"></i></button>
+    <button type="submit" class="btn btn-outline-danger mb-2" onclick="cancelUpdateContacts(${rowIndex})"><i class="fa-solid fa-x fa-sm"></i></button>`;
 }
 
 function cancelUpdateContacts(rowIndex) {
@@ -215,8 +215,8 @@ function cancelUpdateContacts(rowIndex) {
     row.cells[1].innerHTML = contact.LastName;
     row.cells[2].innerHTML = `<a href="tel:${contact.Phone}">${phone}</a>`;
     row.cells[3].innerHTML = `<a href="mailto:${contact.Email}">${contact.Email}</a>`;
-    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${rowIndex})"><i class="fa-solid fa-pen-to-square fa-sm"></i> Edit</button>
-    <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${rowIndex})"><i class="fa-solid fa-trash fa-sm"></i> Delete</button>`;
+    row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-light mb-2" onclick="openUpdateContacts(${rowIndex})"><i class="fa-solid fa-pen-to-square fa-sm"></i></button>
+    <button type="submit" class="btn btn-outline-danger mb-2" onclick="doDeleteContacts(${rowIndex})"><i class="fa-solid fa-trash fa-sm"></i></button>`;
 }
 
 function doUpdateContacts(rowIndex) {

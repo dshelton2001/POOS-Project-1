@@ -85,13 +85,13 @@ var display = false;
 
 function displayMsg() {
 	console.log(display);
-	if(display == false) {
+	if (display == false) {
 		createErrMsg();
 		display = true;
 	}
 }
 
-function createErrMsg() {
+/*function createErrMsg() {
 	const div = document.createElement("div");
 	const target = document.getElementById("parentDiv");
 	const p4 = document.createElement("p");
@@ -191,3 +191,4 @@ function checkPasswordStrength(str) {
 		return false;
 	return true;
 }
+*/

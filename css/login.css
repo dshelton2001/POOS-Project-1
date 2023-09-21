@@ -1,86 +1,54 @@
-body 
-{
-    background-image: url(../images/background.jpg);
+body {
+    background-image: url(../images/blurryHouseBackground.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#webLogo {
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    background: rgba(255, 255, 255, 0.2);
-    min-width: 75px;
-    width: 5%;
-    border-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    border-style: solid;
+label {
+    font-size: 2rem;
 }
 
-#loginContainer {
-    background-color: rgba(122, 157, 84, 0.8);
+.bg {
+    color: white;
+    background: linear-gradient(to bottom, rgba(50, 56, 62, 0.5), 50%, rgba(50, 56, 62, 0));
+}
+
+#title {
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+    margin-top: 7vh;
+}
+
+#login-container {
+    background-color: #32383e;
+    color: white;
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    min-width: 400px;
     width: 50%;
     max-width: 750px;
+    margin: 3vh auto 0 auto;
+    padding: 25px;
+}
+
+#register-text {
+    text-align: left;
+}
+
+div.invalid-feedback {
+    font-size: 1rem;
+}
+
+.link, .link:hover {
+    color: #79c255;
+}
+
+#login-container #submit-btn {
+    display: block;
+    min-width: 150px;
+    width: 30%;
     margin: auto;
-    padding: 15px;
-    text-align: center;
-}
-
-#loginContainer > .innercontents {
-    margin: 20px;
-    padding: 10px;
-    font-size: 30px;
-    border-color: rgba(0, 0, 0, 0.25);
-    border-style: solid;
-    border-width: 0.1px;
-    border-radius: 10px;
-}
-
-#loginContainer span {
-    font-size: 30px;
-}
-
-#loginTitle {
-    color: aliceblue;
-    text-align: center;
-    font-size: 75px;
-}
-
-#usernameInput {
-    width: 70%;
-}
-
-#passwordInput {
-    width: 70%;
-}
-
-#loginButton {
-    width: 25%;
-    min-width: 110px;
-    cursor: pointer;
-}
-
-#loginButton:hover {
-    background-color: #F2EE9D;
-}
-
-.loginText {
-    font-size: 25px;
-    margin: 0px;
-}
-
-#loginResultText {
-    color: #8C3333;
-}
-
-#signUpText {
-    color: white;
-    text-decoration: none;
-}
-
-#signUpText:hover {
-    text-decoration: underline;
 }

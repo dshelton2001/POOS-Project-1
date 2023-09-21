@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<div id="parentDiv">
+	<div id="parentDiv" class="container vh-100 d-flex justify-content-center align-items-center">
 		<div class="rounded" id="userDetailsDiv">
 			<h1 class="signupTitle fw-bolder">Sign up</h1>
 			<div class="form-floating mb-auto mt-2" id="firstDiv">
@@ -26,28 +26,44 @@
 			</div>
 			<div class="form-floating mb-auto mt-3" id="lastDiv">
 				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name"
-				onclick="displayMsg();" onkeyup="checkInput();">
+					onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="lastnameInput">Last Name</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="userDiv">
 				<input type="text" class="form-control" id="usernameInput" placeholder="Username"
-				onclick="displayMsg();" onkeyup="checkInput();">
+					onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="usernameInput">Username</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="passDiv">
 				<input type="password" class="form-control" id="passwordInput" placeholder="Password"
-				onclick="displayMsg();" onkeyup="checkInput();">
+					onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="passwordInput">Password</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="conpassDiv">
 				<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password"
-				onclick="displayMsg();" onkeyup="checkInput();">
+					onclick="displayMsg();" onkeyup="checkInput();">
 				<label for="confirmpasswordInput">Confirm Password</label>
 			</div>
 			<div id="buttondiv">
-				<button class="btn-default mt-3" id="ConfirmBtn" onclick="checkInput();">Sign Up</button>
+				<button id="ConfirmBtn" class="btn btn-success mt-3 mb-2" type="submit" onclick="doSignUp();">Sign
+					Up</button>
 			</div>
-			Already have an account<a href="login.html"> Sign Up</a>
+			<p id="login-text">Already Signed Up? <a class="link" href="login.html">Login</a></p>
+		</div>
+		<div>
+			<div class="container position-absolute mx-3" id="errMsg">
+				<div class="row position-relative errBox" id="nameErr">
+					<p class="my-auto">Can't use special chracters for first and last name</p>
+				</div>
+				<div class="row position-relative errBox" id="usernameErr">
+					<p class="my-auto">Username already used</p>
+				</div>
+				<div class="row position-relative errBox" id="passwordErr">
+					<p class="my-auto">Password must have at least 8 characters</p>
+					<p class="my-auto">Password must have special character</p>
+					<p class="my-auto">Passwords must match</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
