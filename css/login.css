@@ -28,7 +28,7 @@ label {
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     min-width: 400px;
-    width: 50%;
+    width: 20%;
     max-width: 750px;
     margin: 3vh auto 0 auto;
     padding: 25px;
@@ -48,7 +48,8 @@ div.invalid-feedback {
 
 #login-container #submit-btn {
     display: block;
-    min-width: 150px;
+    min-width: 50px;
     width: 30%;
+    max-width: 150px;
     margin: auto;
 }
