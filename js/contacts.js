@@ -198,10 +198,10 @@ function openUpdateContacts(rowIndex) {
     let contact = tableContacts[rowIndex];
     let row = contactsTable.rows[rowIndex + 1];
 
-    row.cells[0].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.FirstName}" autocomplete="off">`;
+    row.cells[0].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.FirstName}" autocomplete="off"><div class="invalid-feedback">First name cannot be empty.</div>`;
     row.cells[1].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.LastName}" autocomplete="off">`;
-    row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Phone}" autocomplete="off">`;
-    row.cells[3].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Email}" autocomplete="off">`;
+    row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Phone}" autocomplete="off"><div class="invalid-feedback">Invalid phone number.</div>`;
+    row.cells[3].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Email}" autocomplete="off"><div class="invalid-feedback">Invalid email address.</div>`;
     row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-success mb-2" onclick="doUpdateContacts(${rowIndex})"><i class="fa-solid fa-check fa-sm"></i></button>
     <button type="submit" class="btn btn-outline-danger mb-2" onclick="cancelUpdateContacts(${rowIndex})"><i class="fa-solid fa-x fa-sm"></i></button>`;
 }
@@ -222,6 +222,10 @@ function cancelUpdateContacts(rowIndex) {
 function doUpdateContacts(rowIndex) {
     let row = contactsTable.rows[rowIndex + 1];
     let contact = tableContacts[rowIndex];
+
+    if (hasInvalidData(rowIndex)) {
+        return;
+    }
 
     let tmp = {
         updatedFirst : row.cells[0].firstChild.value,
@@ -259,6 +263,40 @@ function doUpdateContacts(rowIndex) {
     } catch (err) {
         console.log("Error: " + err);
     }
+}
+
+// Horrendous validation code that needs to be reformated later. Please thread carefully.
+function hasInvalidData(rowIndex) {
+    let isInvalid = false;
+    let row = contactsTable.rows[rowIndex + 1];
+
+    let firstName = row.cells[0].firstChild;
+    let phone = row.cells[2].firstChild;
+    let email = row.cells[3].firstChild;
+
+    if (firstName.value.length == 0) {
+        isInvalid = true;
+        firstName.classList.add('is-invalid');
+    } else {
+        firstName.classList.remove('is-invalid');
+    }
+
+    let phoneAsNumber = Number(phone.value);
+    if (phone.value.length != 10 || !Number.isInteger(phoneAsNumber) || phoneAsNumber < 0) {
+        isInvalid = true;
+        phone.classList.add('is-invalid');
+    } else {
+        phone.classList.remove('is-invalid');
+    }
+
+    if (!validateEmail(email.value)) {
+        isInvalid = true;
+        email.classList.add('is-invalid');
+    } else {
+        email.classList.remove('is-invalid');
+    }
+
+    return isInvalid;
 }
 
 function doDeleteContacts(rowIndex) {
@@ -303,7 +341,7 @@ function doLogOut() {
 }
 
 function doDeleteUser() {
-    if (!confirm("Are you sure you want to delete your account?")) {
+    if (!confirm("Are you sure you want to delete your account? All contact data will also be lost.")) {
         return;
     }
 
@@ -337,6 +375,11 @@ function doDeleteUser() {
 function checkSpecialCharacters(str) {
 	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};:\\|,.<>\/?~]/;
 	return specialChars.test(str);
+}
+
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
 }
 
 searchInput.addEventListener('keypress', (e) => {
