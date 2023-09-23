@@ -82,7 +82,7 @@ function doAddContacts() {
     let tmp = {
         fName : firstNameInput.value,
         lName : lastNameInput.value,
-        phoneNum : phoneInput.value,
+        phoneNum : phoneInput.value.replace(/\D+/g, ''),
         emailAdd : emailInput.value,
         userID : user.userId
     };
@@ -208,10 +208,15 @@ function openUpdateContacts(rowIndex) {
 
     row.cells[0].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.FirstName}" autocomplete="off"><div class="invalid-feedback">First name cannot be empty.</div>`;
     row.cells[1].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.LastName}" autocomplete="off"><div class="invalid-feedback">Last name cannot be empty.</div>`;
-    row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Phone}" autocomplete="off"><div class="invalid-feedback">Invalid phone number.</div>`;
+    row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${formatNumber(contact.Phone)}" autocomplete="off"><div class="invalid-feedback">Invalid phone number.</div>`;
     row.cells[3].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Email}" autocomplete="off"><div class="invalid-feedback">Invalid email address.</div>`;
     row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-success mb-2" onclick="doUpdateContacts(${rowIndex})"><i class="fa-solid fa-check fa-sm"></i></button>
     <button type="submit" class="btn btn-outline-danger mb-2" onclick="cancelUpdateContacts(${rowIndex})"><i class="fa-solid fa-x fa-sm"></i></button>`;
+
+    // we still need to check formatting for the phone number
+    row.cells[2].firstChild.addEventListener('change', (event) => {
+        checkNumber(event.target)
+    });
 }
 
 function cancelUpdateContacts(rowIndex) {
@@ -241,10 +246,10 @@ function doUpdateContacts(rowIndex) {
     }
 
     let tmp = {
-        updatedFirst : row.cells[0].firstChild.value,
-        updatedLast : row.cells[1].firstChild.value,
-        updatedPhone : row.cells[2].firstChild.value,
-        updatedEmail : row.cells[3].firstChild.value,
+        updatedFirst : firstName.value,
+        updatedLast : lastName.value,
+        updatedPhone : phone.value.replace(/\D+/g, ''),
+        updatedEmail : email.value,
         Id : contact.ID
     };
     let jsonPayload = JSON.stringify(tmp);
@@ -295,8 +300,8 @@ function hasInvalidData(firstNameInput, lastNameInput, phoneInput, emailInput) {
         lastNameInput.classList.remove('is-invalid');
     }
 
-    let phoneAsNumber = Number(phoneInput.value);
-    if (phoneInput.value.length != 10 || !Number.isInteger(phoneAsNumber) || phoneAsNumber < 0) {
+    let phoneAsNumber = phoneInput.value.replace(/\D+/g, '');
+    if (phoneAsNumber.length != 10) {
         isInvalid = true;
         phoneInput.classList.add('is-invalid');
     } else {
@@ -403,7 +408,13 @@ searchInput.addEventListener('keypress', (e) => {
 });
 
 phoneInput.addEventListener('change', (event) => {
-    // strips the value down to only numbers
+    checkNumber(phoneInput)
+});
+
+
+
+function checkNumber(phoneInput)
+{
     number = phoneInput.value.replace(/\D+/g, '')
 
     // using a switch statement in case we want to do more
@@ -415,7 +426,7 @@ phoneInput.addEventListener('change', (event) => {
         default:
             phoneInput.value = number;
     }
-});
+}
 
 // NOTE: the number is assumed to be a string
 function formatNumber(number)
