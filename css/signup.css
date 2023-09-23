@@ -5,39 +5,30 @@ body {
 	background-size: cover;
 }
 
+.bg {
+	color: white;
+	background: linear-gradient(to bottom, rgba(50, 56, 62, 0.5), 50%, rgba(50, 56, 62, 0));
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
 #userDetailsDiv {
 	display: grid;
 	place-items: center;
 	padding-top: 20px;
 	padding-bottom: 22px;
 	background-color: #32383e;
-	width: 38%;
+	width: 30%;
 	max-width: 750px;
 	box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
-}
-
-#errDiv {
-	background-color: white;
-	border-color: black;
-	border-style: solid;
-	border-width: 5px;
-	border-radius: 7px;
-	color: black;
-	padding: 10px 10px 10px 10px;
-	position: relative;
-	left: 476px;
-	top: 226px;
+	padding-top: 30px;
 }
 
 .signupTitle {
-	position: relative;
-	top: 1px;
+	bottom: 20px;
 	color: white;
 	text-align: center;
-}
-
-.inputTitle {
-	display: inline;
+	font-size: 32px;
 }
 
 #userDiv,
@@ -48,20 +39,17 @@ body {
 	width: 70%;
 }
 
-#firstnameInput:active {
-	color: #79c255;
-}
-
 #errMsg {
 	max-width: 380px;
 }
 
 .errText {
-	color: black;
+	color: rgb(197, 3, 3);
 }
 
 #nameErr {
-	bottom: 149px;
+	width: max-content;
+	bottom: 200px;
 
 }
 
@@ -71,12 +59,13 @@ body {
 }
 
 #passwordErr {
-	bottom: 40px;
+	width: 90%;
+	bottom: 25px;
 
 }
 
 #fillErr {
-	bottom: 220px;
+	bottom: 250px;
 }
 
 #login-text {
@@ -89,20 +78,23 @@ body {
 }
 
 .errBox {
-	background-color: white;
+	background-color: #FFCCCB;
 	color: red;
 	border: solid;
+	border-width: 3px;
 	max-width: max-content;
+	border-radius: 7px;
 }
+
 
 .notvisible {
 	opacity: 0;
-	transition: 0.5s 0.5s;
+	transition: 0.4s;
 }
 
 .visible {
 	opacity: 1;
-	transition: 0.5s 0.5s;
+	transition: 0.4s;
 }
 
 .form-floating #buttondiv {
@@ -114,7 +106,14 @@ body {
 #ConfirmBtn {
 	padding: 5px 30px 5px 30px;
 	border-radius: 7px;
+	background-color: #28a745;
+	border-color: #28a745;
 	cursor: pointer;
 	font-size: 19px;
-	transition-duration: 0.4s;
+
+}
+
+#ConfirmBtn:hover {
+	background-color: #218938;
+	border-color: #218938;
 }

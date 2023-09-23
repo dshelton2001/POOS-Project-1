@@ -4,11 +4,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/5c92cd29ea.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>SignUp Page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/5c92cd29ea.js" crossorigin="anonymous"></script>
+
 	<script defer src="js/md5.js"></script>
 	<script defer src="js/cookies.js"></script>
 	<script defer src="js/signup.js"></script>
@@ -16,20 +17,46 @@
 </head>
 
 <body>
-	<div id="parentDiv" class="container vh-100 d-flex justify-content-center align-items-center">
-		<div class="rounded" id="userDetailsDiv">
-			<h1 class="signupTitle fw-bolder">Sign up</h1>
+	<nav class="navbar navbar-expand-md navbar-dark bg">
+		<a class="navbar-brand" href="/">
+			<img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Leaf logo">
+			Vyne
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a id="contacts-link" class="nav-link" href="contacts.html">Contacts <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="about-us.html">About Us</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://github.com/dshelton2001/POOS-Project-1" target="_blank"
+						rel="noopener noreferrer">GitHub</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<h1 class="signupTitle fw-bolder mt-5 mb-1">Sign up</h1>
+	<div id="parentDiv" class="container  d-flex justify-content-center align-items-center">
+		<div class="rounded my-5 pb-2" id="userDetailsDiv">
 			<div class="form-floating mb-auto mt-2" id="firstDiv">
-				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name">
+				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name" autocomplete="off">
 				<label for="firstnameInput">First Name</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="lastDiv">
-				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name">
-				<label for="lastnameInput">Last Name</label>
+				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name" autocomplete="off">
+				<label for=" lastnameInput">Last Name</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="userDiv">
-				<input type="text" class="form-control" id="usernameInput" placeholder="Username">
-				<label for="usernameInput">Username</label>
+				<input type="text" class="form-control" id="usernameInput" placeholder="Username" autocomplete="off">
+				<label for=" usernameInput">Username</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="passDiv">
 				<input type="password" class="form-control" id="passwordInput" placeholder="Password">
@@ -51,7 +78,7 @@
 					<p class="my-auto e1 errText" id="fillAllText">Fill in all boxes</p>
 				</div>
 				<div class="row position-relative errBox e2 notvisible" id="nameErr">
-					<p class="my-auto errText e2" id="specialCharText">Can't use special chracters for first and last
+					<p class="my-auto errText e2" id="specialCharText">Can't use special characters for first and last
 						name
 					</p>
 				</div>
@@ -59,8 +86,9 @@
 					<p class="my-auto errText e3" id="dupUserText"></p>
 				</div>
 				<div class="row position-relative errBox e4 notvisible" id="passwordErr">
-					<p class="my-auto errText e4 notvisible" id="lenText">Password must have at least 8 characters</p>
+					<p class="my-auto errText e4 notvisible" id="lenText">Password must have at least 8 characters </p>
 					<p class="my-auto errText e4 notvisible" id="passSpecialText">Password must have special character
+						</i>
 					</p>
 					<p class="my-auto errText e4 notvisible" id="matchText">Passwords must match</p>
 				</div>
