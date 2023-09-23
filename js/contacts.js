@@ -8,7 +8,8 @@ const firstNameInput = document.querySelector('#fname-input');
 const lastNameInput = document.querySelector('#lname-input');
 const phoneInput = document.querySelector('#phone-input');
 const emailInput = document.querySelector('#email-input');
-const submitButton = document.querySelector('#submit-button');
+const addSuccessMsg = document.querySelector('#add-success');
+
 // Constant Variables
 const HttpStatus = { success: 200 };
 const XhrReadyState = { done: 4 };
@@ -32,8 +33,6 @@ function setUp() {
 
     if (!doesUserExist(user)) {
         window.location.href = 'login.html';
-    } else {
-        // welcomeTitle.innerHTML = 'Welcome, ' + user.firstName + '!';
     }
 }
 
@@ -63,14 +62,20 @@ function doesUserExist(user) {
     return true;
 }
 
-function openAddContacts() {
-    contactInfo.removeAttribute('hidden');
+function clearAddContactModal() {
     firstNameInput.value = '';
+    firstNameInput.classList.remove('is-invalid');
+
     lastNameInput.value = '';
+    lastNameInput.classList.remove('is-invalid');
+
     phoneInput.value = '';
+    phoneInput.classList.remove('is-invalid');
+
     emailInput.value = '';
-    submitButton.innerHTML = 'Create';
-    submitButton.setAttribute('onclick', 'doAddContacts()');
+    emailInput.classList.remove('is-invalid');
+
+    addSuccessMsg.setAttribute('hidden', '');
 }
 
 function doAddContacts() {
@@ -84,7 +89,9 @@ function doAddContacts() {
 
     let jsonPayload = JSON.stringify(tmp);
 
-    checkInput();
+    if (hasInvalidData(firstNameInput, lastNameInput, phoneInput, emailInput)) {
+        return;
+    }
 
     let url = apiUrlBase + '/' + addContactsEndpoint;
 
@@ -100,8 +107,9 @@ function doAddContacts() {
                     console.log("Error when creating contact...");
                     return;
                 }
-                
-                contactInfo.setAttribute("hidden", "");
+
+                addSuccessMsg.removeAttribute('hidden');
+                setTimeout(function () {addSuccessMsg.setAttribute('hidden', '')}, 3000);
                 doSearchContacts();
             }
         };
@@ -199,7 +207,7 @@ function openUpdateContacts(rowIndex) {
     let row = contactsTable.rows[rowIndex + 1];
 
     row.cells[0].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.FirstName}" autocomplete="off"><div class="invalid-feedback">First name cannot be empty.</div>`;
-    row.cells[1].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.LastName}" autocomplete="off">`;
+    row.cells[1].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.LastName}" autocomplete="off"><div class="invalid-feedback">Last name cannot be empty.</div>`;
     row.cells[2].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Phone}" autocomplete="off"><div class="invalid-feedback">Invalid phone number.</div>`;
     row.cells[3].innerHTML = `<input type="text" class="form-control bg-dark text-white" value="${contact.Email}" autocomplete="off"><div class="invalid-feedback">Invalid email address.</div>`;
     row.cells[4].innerHTML = `<button type="submit" class="btn btn-outline-success mb-2" onclick="doUpdateContacts(${rowIndex})"><i class="fa-solid fa-check fa-sm"></i></button>
@@ -223,7 +231,12 @@ function doUpdateContacts(rowIndex) {
     let row = contactsTable.rows[rowIndex + 1];
     let contact = tableContacts[rowIndex];
 
-    if (hasInvalidData(rowIndex)) {
+    let firstName = row.cells[0].firstChild;
+    let lastName = row.cells[1].firstChild;
+    let phone = row.cells[2].firstChild;
+    let email = row.cells[3].firstChild;
+
+    if (hasInvalidData(firstName, lastName, phone, email)) {
         return;
     }
 
@@ -265,35 +278,36 @@ function doUpdateContacts(rowIndex) {
     }
 }
 
-// Horrendous validation code that needs to be reformated later. Please thread carefully.
-function hasInvalidData(rowIndex) {
+function hasInvalidData(firstNameInput, lastNameInput, phoneInput, emailInput) {
     let isInvalid = false;
-    let row = contactsTable.rows[rowIndex + 1];
 
-    let firstName = row.cells[0].firstChild;
-    let phone = row.cells[2].firstChild;
-    let email = row.cells[3].firstChild;
-
-    if (firstName.value.length == 0) {
+    if (firstNameInput.value.length == 0) {
         isInvalid = true;
-        firstName.classList.add('is-invalid');
+        firstNameInput.classList.add('is-invalid');
     } else {
-        firstName.classList.remove('is-invalid');
+        firstNameInput.classList.remove('is-invalid');
     }
 
-    let phoneAsNumber = Number(phone.value);
-    if (phone.value.length != 10 || !Number.isInteger(phoneAsNumber) || phoneAsNumber < 0) {
+    if (lastNameInput.value.length == 0) {
         isInvalid = true;
-        phone.classList.add('is-invalid');
+        lastNameInput.classList.add('is-invalid');
     } else {
-        phone.classList.remove('is-invalid');
+        lastNameInput.classList.remove('is-invalid');
     }
 
-    if (!validateEmail(email.value)) {
+    let phoneAsNumber = Number(phoneInput.value);
+    if (phoneInput.value.length != 10 || !Number.isInteger(phoneAsNumber) || phoneAsNumber < 0) {
         isInvalid = true;
-        email.classList.add('is-invalid');
+        phoneInput.classList.add('is-invalid');
     } else {
-        email.classList.remove('is-invalid');
+        phoneInput.classList.remove('is-invalid');
+    }
+
+    if (emailInput.value.length > 0 && !validateEmail(emailInput.value)) {
+        isInvalid = true;
+        emailInput.classList.add('is-invalid');
+    } else {
+        emailInput.classList.remove('is-invalid');
     }
 
     return isInvalid;
@@ -385,11 +399,5 @@ function validateEmail(email) {
 searchInput.addEventListener('keypress', (e) => {
     if (e.key == 'Enter') {
         doSearchContacts();
-    }
-});
-
-contactInfo.addEventListener('click', (e) =>  {
-    if (e.target.id == 'contact-info') {
-        contactInfo.setAttribute('hidden', '');
     }
 });

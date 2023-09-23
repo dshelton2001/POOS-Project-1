@@ -88,59 +88,6 @@ table a:hover {
     margin: 0;
 }
 
-#contact-info {
-    background: rgb(0,0,0,.5);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
-#contact-info .container {
-    background-color: rgba(122, 157, 84, 0.8);
-    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    width: 50%;
-    max-width: 750px;
-    margin: 200px auto;
-    padding: 15px;
-    text-align: center;
-}
-
-.container .innercontents {
-    margin: 20px;
-    padding: 10px;
-    font-size: 25px;
-    border-color: rgba(0, 0, 0, 0.25);
-    border-style: solid;
-    border-width: 0.1px;
-    border-radius: 10px;
-    width: 70%;
-}
-
-#submit-button {
-    margin: 20px;
-    padding: 10px;
-    font-size: 25px;
-    border-color: rgba(0, 0, 0, 0.25);
-    border-style: solid;
-    border-width: 0.1px;
-    border-radius: 10px;
-    width: 25%;
-    min-width: 110px;
-    cursor: pointer;
-}
-
-.container span {
-    font-size: 25px;
-}
-
-#submit-button:hover {
-    background-color: #F2EE9D;
-}
-
 #delete-account {
     color: red;
 }

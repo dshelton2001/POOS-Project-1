@@ -58,7 +58,7 @@
                 <button type="submit" class="btn btn-primary mb-2" onclick="doSearchContacts()"><i class="fa-solid fa-magnifying-glass fa-sm"></i> Search</button>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-success mb-2" onclick="openAddContacts()"><i class="fa-solid fa-user-plus fa-sm"></i> Add</button>
+                <button type="submit" class="btn btn-success mb-2" data-toggle="modal" data-target="#add-contact-modal" onclick="clearAddContactModal()"><i class="fa-solid fa-user-plus fa-sm"></i> Add</button>
             </div>
         </div>
     </div>
@@ -81,17 +81,55 @@
         </table>
     </div>
 
-    <div id="contact-info" hidden>
-        <div class="container">
-            <span>First Name</span>
-            <input type="text" class="innercontents" id="fname-input" placeholder="First Name" /><br />
-            <span>Last Name</span>
-            <input type="text" class="innercontents" id="lname-input" placeholder="Last Name" /><br />
-            <span>Phone</span>
-            <input type="text" class="innercontents" id="phone-input" placeholder="1234567890" /><br />
-            <span>Email</span>
-            <input type="text" class="innercontents" id="email-input" placeholder="mail@domain.com" /><br />
-            <button type="button" id="submit-button" onclick="">Submit</button>
+    <div class="modal fade" id="add-contact-modal" tabindex="-1" role="dialog" aria-labelledby="add-contact-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark" style="color:white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-contact-modal-label">Add a new contact</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: white">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="form-group">
+                            <label for="fname-input" class="col-form-label">First Name<span style="color: red">*</span></label>
+                            <input type="text" class="form-control" id="fname-input" placeholder="First Name" autocomplete="off">
+                            <div class="invalid-feedback">
+                                First name cannot be empty.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname-input" class="col-form-label">Last Name<span style="color: red">*</span></label>
+                            <input type="text" class="form-control" id="lname-input" placeholder="Last Name" autocomplete="off">
+                            <div class="invalid-feedback">
+                                Last name cannot be empty.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone-input" class="col-form-label">Phone<span style="color: red">*</span></label>
+                            <input type="text" class="form-control" id="phone-input" placeholder="1234567890" autocomplete="off">
+                            <div class="invalid-feedback">
+                                Invalid phone number.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-input" class="col-form-label">Email</label>
+                            <input type="text" class="form-control" id="email-input" placeholder="mail@domain.com" autocomplete="off">
+                            <div class="invalid-feedback">
+                                Invalid email address.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="add-success" class="alert alert-success" role="alert" hidden>
+                        Contact successfully added!
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" onclick="doAddContacts()">Add Contact</button>
+                </div>
+            </div>
         </div>
     </div>
 
