@@ -401,3 +401,24 @@ searchInput.addEventListener('keypress', (e) => {
         doSearchContacts();
     }
 });
+
+phoneInput.addEventListener('change', (event) => {
+    // strips the value down to only numbers
+    number = phoneInput.value.replace(/\D+/g, '')
+
+    // using a switch statement in case we want to do more
+    switch (number.length)
+    {
+        case 10:
+            phoneInput.value = formatNumber(number);
+            break;
+        default:
+            phoneInput.value = number;
+    }
+});
+
+// NOTE: the number is assumed to be a string
+function formatNumber(number)
+{
+    return number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+}
