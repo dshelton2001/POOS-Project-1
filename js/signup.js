@@ -26,15 +26,12 @@ function doSignUp() {
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = apiUrlBase + '/' + signupEndpoint;
-
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', url, true);
 	xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-
 	try {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
-				let jsonObject = JSON.parse(xhr.responseText);
 				saveUserCookie(jsonObject.id, jsonObject.firstName, jsonObject.lastName, jsonObject.userName, jsonObject.password);
 				window.location.href = 'login.html';
 			}
@@ -42,12 +39,12 @@ function doSignUp() {
 		xhr.send(jsonPayload);
 	}
 	catch (err) {
-		console.log("badinput");
 		document.getElementById("dupUserText").innerHTML = err.message;
 		changeVisability(e3, 0);
 	}
 }
 
+//Changes visability of the err messages
 function changeVisability(a, state) {
 	if (state == 0) {
 		for (let i = 0; i < a.length; i++) {
@@ -62,6 +59,7 @@ function changeVisability(a, state) {
 	}
 }
 
+//Checks for valid inputs
 function checkInput() {
 	var nonempty;
 	var sc1;
@@ -87,8 +85,7 @@ function checkInput() {
 	}
 
 	// Validate First or Last contain no special chars.
-	if (checkSpecialCharacters(firstnameInput.value) || checkSpecialCharacters(lastnameInput.value)
-		|| firstnameInput.value == "" || lastnameInput.value == "") {
+	if (checkSpecialCharacters(firstnameInput.value) || checkSpecialCharacters(lastnameInput.value)) {
 		changeVisability(e2, 0);
 		sc1 = false;
 	} else {
@@ -103,12 +100,14 @@ function checkInput() {
 		passLen = true;
 	}
 
+	//Validate no special characters
 	if (checkSpecialCharacters(passwordInput.value) != true) {
 		passSc = false;
 	} else {
 		passSc = true;
 	}
 
+	//Validate password match
 	if (confirmpasswordInput.value != passwordInput.value || passwordInput.value == "") {
 		passMatch = false;
 	} else {
@@ -126,21 +125,16 @@ function checkInput() {
 	}
 }
 
+//Checks for special character in input
 function checkSpecialCharacters(str) {
 	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};:\\|,.<>\/?~]/;
 	return specialChars.test(str);
 }
 
-function checkExistingUsername(str) {
-
-}
-
+//Checks the length of the password
 function checkPasswordStrength(str) {
 	if (str.length < 8)
 		return false;
 	return true;
 }
 
-function checkPasswords() {
-
-}
