@@ -56,6 +56,10 @@ body {
 	max-width: 380px;
 }
 
+.errText {
+	color: black;
+}
+
 #nameErr {
 	bottom: 149px;
 
@@ -71,6 +75,10 @@ body {
 
 }
 
+#fillErr {
+	bottom: 220px;
+}
+
 #login-text {
 	color: white;
 }
@@ -82,46 +90,19 @@ body {
 
 .errBox {
 	background-color: white;
-	color: black;
+	color: red;
 	border: solid;
 	max-width: max-content;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-	.errBox-animation {
-		animation: wipe-enter 1s 1;
-	}
+.notvisible {
+	opacity: 0;
+	transition: 0.5s 0.5s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-	.errBox-animation2 {
-		animation: wipe-exit 1s 1;
-	}
-}
-
-@keyframes wipe-enter {
-	50% {
-		transform: scale(1, .025);
-	}
-
-	0% {
-		transform: scale(0, 0);
-	}
-}
-
-@keyframes wipe-exit {
-	0% {
-		transform: scale(1, .025);
-	}
-
-	100% {
-		transform: scale(0, 0);
-	}
-}
-
-.slidein {
-	width: 0px;
-
+.visible {
+	opacity: 1;
+	transition: 0.5s 0.5s;
 }
 
 .form-floating #buttondiv {

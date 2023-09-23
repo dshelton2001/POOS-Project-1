@@ -20,48 +20,49 @@
 		<div class="rounded" id="userDetailsDiv">
 			<h1 class="signupTitle fw-bolder">Sign up</h1>
 			<div class="form-floating mb-auto mt-2" id="firstDiv">
-				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name"
-					onclick="displayMsg();" onkeyup="checkInput();">
+				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name">
 				<label for="firstnameInput">First Name</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="lastDiv">
-				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name"
-					onclick="displayMsg();" onkeyup="checkInput();">
+				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name">
 				<label for="lastnameInput">Last Name</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="userDiv">
-				<input type="text" class="form-control" id="usernameInput" placeholder="Username"
-					onclick="displayMsg();" onkeyup="checkInput();">
+				<input type="text" class="form-control" id="usernameInput" placeholder="Username">
 				<label for="usernameInput">Username</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="passDiv">
-				<input type="password" class="form-control" id="passwordInput" placeholder="Password"
-					onclick="displayMsg();" onkeyup="checkInput();">
+				<input type="password" class="form-control" id="passwordInput" placeholder="Password">
 				<label for="passwordInput">Password</label>
 			</div>
 			<div class="form-floating mb-auto mt-3" id="conpassDiv">
-				<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password"
-					onclick="displayMsg();" onkeyup="checkInput();">
+				<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password">
 				<label for="confirmpasswordInput">Confirm Password</label>
 			</div>
 			<div id="buttondiv">
-				<button id="ConfirmBtn" class="btn btn-success mt-3 mb-2" type="submit" onclick="doSignUp();">Sign
+				<button id="ConfirmBtn" class="btn btn-success mt-3 mb-2" type="submit" onclick="checkInput();">Sign
 					Up</button>
 			</div>
 			<p id="login-text">Already Signed Up? <a class="link" href="login.html">Login</a></p>
 		</div>
 		<div>
 			<div class="container position-absolute mx-3" id="errMsg">
-				<div class="row position-relative errBox errBox-animation" id="nameErr">
-					<p class="my-auto">Can't use special chracters for first and last name</p>
+				<div class="row position-relative errBox e1 notvisible" id="fillErr">
+					<p class="my-auto e1 errText" id="fillAllText">Fill in all boxes</p>
 				</div>
-				<div class="row position-relative errBox errBox-animation2" id="usernameErr">
-					<p class="my-auto">Username already used</p>
+				<div class="row position-relative errBox e2 notvisible" id="nameErr">
+					<p class="my-auto errText e2" id="specialCharText">Can't use special chracters for first and last
+						name
+					</p>
 				</div>
-				<div class="row position-relative errBox" id="passwordErr">
-					<p class="my-auto">Password must have at least 8 characters</p>
-					<p class="my-auto">Password must have special character</p>
-					<p class="my-auto">Passwords must match</p>
+				<div class="row position-relative errBox e3 notvisible" id="usernameErr">
+					<p class="my-auto errText e3" id="dupUserText"></p>
+				</div>
+				<div class="row position-relative errBox e4 notvisible" id="passwordErr">
+					<p class="my-auto errText e4 notvisible" id="lenText">Password must have at least 8 characters</p>
+					<p class="my-auto errText e4 notvisible" id="passSpecialText">Password must have special character
+					</p>
+					<p class="my-auto errText e4 notvisible" id="matchText">Passwords must match</p>
 				</div>
 			</div>
 		</div>
