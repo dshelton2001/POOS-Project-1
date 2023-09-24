@@ -32,6 +32,7 @@ function doSignUp() {
 	try {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+				let jsonObject = JSON.parse(xhr.responseText);
 				saveUserCookie(jsonObject.id, jsonObject.firstName, jsonObject.lastName, jsonObject.userName, jsonObject.password);
 				sessionStorage.setItem("username", userName);
 				sessionStorage.setItem("password", password);
