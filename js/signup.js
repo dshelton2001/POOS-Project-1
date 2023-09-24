@@ -33,10 +33,6 @@ function doSignUp() {
 	try {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
-				let jsonObject = JSON.parse(xhr.responseText);
-				saveUserCookie(jsonObject.id, jsonObject.firstName, jsonObject.lastName, jsonObject.userName, jsonObject.password);
-				sessionStorage.setItem("username", userName);
-				sessionStorage.setItem("password", password);
 				window.location.href = 'login.html';
 			}
 			else {
@@ -52,18 +48,11 @@ function doSignUp() {
 
 //Checks for valid inputs
 function checkInput() {
-	var noemptynospecial = false;
-	var passLen = false;
-	var passSc = false;
-	var passMatch = false;
-
 	var elements = document.getElementsByClassName("form-control");
 	var feedback = document.getElementsByClassName("invalid-feedback");
 	var names = [document.getElementById("firstnameInput"), document.getElementById("lastnameInput")];
 
 	// Validate Empty Fields
-	var check1 = 0;
-	var check2 = 0;
 	for (let i = 0; i < elements.length; i++) {
 		if (elements[i].value == "") {
 			elements[i].classList.add("is-invalid");
@@ -75,9 +64,6 @@ function checkInput() {
 			elements[i].classList.remove("is-invalid");
 		}
 	}
-
-	noemptynospecial = (count = 5);
-
 
 	// Validate password strength
 	if (checkPasswordStrength(passwordInput.value) != true ||

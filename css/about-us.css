@@ -13,7 +13,7 @@ body {
 }
 
 .card-body {
-	background-image: linear-gradient(to bottom right, red, yellow);
+	background: linear-gradient(to bottom right, #32383e, #6a7683);
 	border-radius: 7px;
 }
 
