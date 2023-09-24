@@ -33,94 +33,63 @@ function doSignUp() {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
 				saveUserCookie(jsonObject.id, jsonObject.firstName, jsonObject.lastName, jsonObject.userName, jsonObject.password);
+				sessionStorage.setItem("username", userName);
+				sessionStorage.setItem("password", password);
 				window.location.href = 'login.html';
 			}
 		};
 		xhr.send(jsonPayload);
 	}
 	catch (err) {
-		document.getElementById("dupUserText").innerHTML = err.message;
-		changeVisability(e3, 0);
-	}
-}
-
-//Changes visability of the err messages
-function changeVisability(a, state) {
-	if (state == 0) {
-		for (let i = 0; i < a.length; i++) {
-			a[i].classList.remove("notvisible");
-			a[i].classList.add("visible");
-		}
-	} else {
-		for (let i = 0; i < a.length; i++) {
-			a[i].classList.remove("visible");
-			a[i].classList.add("notvisible");
-		}
+		usernameInput.classList.add("is-invalid");
+		document.getElementById("userFeedBack").innerHTML = "Invalid Username"
 	}
 }
 
 //Checks for valid inputs
 function checkInput() {
-	var nonempty;
-	var sc1;
-	var passLen;
-	var passSc;
-	var passMatch;
+	var noemptynospecial = false;
+	var passLen = false;
+	var passSc = false;
+	var passMatch = false;
 
-	const e1 = document.querySelectorAll(".e1");
-	const e2 = document.querySelectorAll(".e2");
-	const e3 = document.querySelectorAll(".e3");
-	const e4 = document.querySelectorAll(".e4");
+	var elements = document.getElementsByClassName("form-control");
+	var feedback = document.getElementsByClassName("invalid-feedback");
+	var names = [document.getElementById("firstnameInput"), document.getElementById("lastnameInput")];
 
 	// Validate Empty Fields
-	if (firstnameInput.value == "" || lastnameInput.value == "" ||
-		usernameInput.value == "" || passwordInput.value == "" ||
-		confirmpasswordInput.value == "") {
-
-		changeVisability(e1, 0);
-		nonempty = false;
-	} else {
-		changeVisability(e1, 1);
-		nonempty = true;
+	var check1 = 0;
+	var check2 = 0;
+	for (let i = 0; i < elements.length; i++) {
+		if (elements[i].value == "") {
+			elements[i].classList.add("is-invalid");
+			feedback[i].innerHTML = "Cannot be empty";
+		} else if (checkSpecialCharacters(elements[i].value) == true && i < 2) {
+			elements[i].classList.add("is-invalid");
+			feedback[i].innerHTML = "Cannot have special characters";
+		} else {
+			elements[i].classList.remove("is-invalid");
+		}
 	}
 
-	// Validate First or Last contain no special chars.
-	if (checkSpecialCharacters(firstnameInput.value) || checkSpecialCharacters(lastnameInput.value)) {
-		changeVisability(e2, 0);
-		sc1 = false;
-	} else {
-		changeVisability(e2, 1);
-		sc1 = true;
-	}
+	noemptynospecial = (count = 5);
+
 
 	// Validate password strength
-	if (checkPasswordStrength(passwordInput.value) != true) {
-		passLen = false;
+	if (checkPasswordStrength(passwordInput.value) != true ||
+		checkSpecialCharacters(passwordInput.value) != true ||
+		confirmpasswordInput.value != passwordInput.value) {
+		passwordInput.classList.add("is-invalid");
+		document.getElementById("passFeedBack").innerHTML = "Password needs 8 characters, needs a special character, and must match confirm password";
 	} else {
-		passLen = true;
+		passwordInput.classList.remove("is-invalid");
 	}
 
-	//Validate no special characters
-	if (checkSpecialCharacters(passwordInput.value) != true) {
-		passSc = false;
-	} else {
-		passSc = true;
-	}
-
-	//Validate password match
-	if (confirmpasswordInput.value != passwordInput.value || passwordInput.value == "") {
-		passMatch = false;
-	} else {
-		passMatch = true;
-	}
-
-	if (!(passLen && passSc && passMatch)) {
-		changeVisability(e4, 0);
-	} else {
-		changeVisability(e4, 1);
-	}
-
-	if (nonempty && sc1 && passLen && passSc && passMatch) {
+	if (!firstnameInput.classList.contains("is-invalid") &&
+		!lastnameInput.classList.contains("is-invalid") &&
+		!usernameInput.classList.contains("is-invalid") &&
+		!passwordInput.classList.contains("is-invalid") &&
+		!confirmpasswordInput.classList.contains("is-invalid")) {
 		doSignUp();
 	}
 }

@@ -1,0 +1,6 @@
+.bg {
+	color: white;
+	background: linear-gradient(to bottom, rgba(50, 56, 62, 0.5), 50%, rgba(50, 56, 62, 0));
+	padding-left: 16px;
+	padding-right: 16px;
+}

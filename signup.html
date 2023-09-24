@@ -7,7 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>SignUp Page</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/5c92cd29ea.js" crossorigin="anonymous"></script>
 
 	<script defer src="js/md5.js"></script>
@@ -44,55 +45,38 @@
 	</nav>
 
 	<h1 class="signupTitle fw-bolder mt-5 mb-1">Sign up</h1>
-	<div id="parentDiv" class="container  d-flex justify-content-center align-items-center">
-		<div class="rounded my-5 pb-2" id="userDetailsDiv">
-			<div class="form-floating mb-auto mt-2" id="firstDiv">
+	<div id="parentDiv" class="container d-flex justify-content-center align-items-center">
+		<div class="rounded mt-4 mb-3 pb-2" id="userDetailsDiv">
+			<div class="form-group" id="firstDiv">
+				<label class="inputLabel">First Name</label>
 				<input type="text" class="form-control" id="firstnameInput" placeholder="First Name" autocomplete="off">
-				<label for="firstnameInput">First Name</label>
+				<div class="invalid-feedback" id="firstnameFeedBack"></div>
 			</div>
-			<div class="form-floating mb-auto mt-3" id="lastDiv">
+			<div class="form-group" id="lastDiv">
+				<label class="inputLabel">Last Name</label>
 				<input type="text" class="form-control" id="lastnameInput" placeholder="Last Name" autocomplete="off">
-				<label for=" lastnameInput">Last Name</label>
+				<div class="invalid-feedback" id="lastnameFeedBack"></div>
 			</div>
-			<div class="form-floating mb-auto mt-3" id="userDiv">
+			<div class="form-group" id="userDiv">
+				<label class="inputLabel">Username</label>
 				<input type="text" class="form-control" id="usernameInput" placeholder="Username" autocomplete="off">
-				<label for=" usernameInput">Username</label>
+				<div class="invalid-feedback" id="userFeedBack"></div>
 			</div>
-			<div class="form-floating mb-auto mt-3" id="passDiv">
+			<div class="form-group" id="passDiv">
+				<label class="inputLabel">Password</label>
 				<input type="password" class="form-control" id="passwordInput" placeholder="Password">
-				<label for="passwordInput">Password</label>
+				<div class="invalid-feedback" id="passFeedBack"></div>
 			</div>
-			<div class="form-floating mb-auto mt-3" id="conpassDiv">
+			<div class="form-group" id="conpassDiv">
+				<label class="inputLabel">Confirm Password</label>
 				<input type="password" class="form-control" id="confirmpasswordInput" placeholder="Comfirm Password">
-				<label for="confirmpasswordInput">Confirm Password</label>
+				<div class="invalid-feedback"></div>
 			</div>
 			<div id="buttondiv">
 				<button id="ConfirmBtn" class="btn btn-success mt-3 mb-2" type="submit" onclick="checkInput();">Sign
 					Up</button>
 			</div>
 			<p id="login-text">Already Signed Up? <a class="link" href="login.html">Login</a></p>
-		</div>
-		<div>
-			<div class="container position-absolute mx-3" id="errMsg">
-				<div class="row position-relative errBox e1 notvisible" id="fillErr">
-					<p class="my-auto e1 errText" id="fillAllText">Fill in all boxes</p>
-				</div>
-				<div class="row position-relative errBox e2 notvisible" id="nameErr">
-					<p class="my-auto errText e2" id="specialCharText">Can't use special characters for first and last
-						name
-					</p>
-				</div>
-				<div class="row position-relative errBox e3 notvisible" id="usernameErr">
-					<p class="my-auto errText e3" id="dupUserText"></p>
-				</div>
-				<div class="row position-relative errBox e4 notvisible" id="passwordErr">
-					<p class="my-auto errText e4 notvisible" id="lenText">Password must have at least 8 characters </p>
-					<p class="my-auto errText e4 notvisible" id="passSpecialText">Password must have special character
-						</i>
-					</p>
-					<p class="my-auto errText e4 notvisible" id="matchText">Passwords must match</p>
-				</div>
-			</div>
 		</div>
 	</div>
 </body>
