@@ -15,20 +15,23 @@ body {
 #userDetailsDiv {
 	display: grid;
 	place-items: center;
-	padding-top: 20px;
-	padding-bottom: 22px;
 	background-color: #32383e;
-	width: 30%;
+	width: 36%;
 	max-width: 750px;
 	box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.25);
 	padding-top: 30px;
 }
 
 .signupTitle {
-	bottom: 20px;
 	color: white;
+	font-weight: bold;
+	font-size: 2em;
 	text-align: center;
-	font-size: 32px;
+}
+
+.inputLabel {
+	font-size: 1.4rem;
+	color: white;
 }
 
 #userDiv,
@@ -36,7 +39,7 @@ body {
 #lastDiv,
 #passDiv,
 #conpassDiv {
-	width: 70%;
+	width: 80%;
 }
 
 #errMsg {
@@ -109,7 +112,7 @@ body {
 	background-color: #28a745;
 	border-color: #28a745;
 	cursor: pointer;
-	font-size: 19px;
+	font-size: 1.2rem;
 
 }
 
