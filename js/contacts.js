@@ -28,6 +28,8 @@ let tableContacts = [];
 
 setUp();
 
+doSearchContacts();
+
 function setUp() {
     user = readUserCookie();
 
