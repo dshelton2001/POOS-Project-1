@@ -26,6 +26,7 @@ function doSignUp() {
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = apiUrlBase + '/' + signupEndpoint;
+
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', url, true);
 	xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
@@ -38,12 +39,14 @@ function doSignUp() {
 				sessionStorage.setItem("password", password);
 				window.location.href = 'login.html';
 			}
+			else {
+				usernameInput.classList.add("is-invalid");
+				document.getElementById("userFeedBack").innerHTML = "Invalid Username";
+			}
 		};
 		xhr.send(jsonPayload);
-	}
-	catch (err) {
-		usernameInput.classList.add("is-invalid");
-		document.getElementById("userFeedBack").innerHTML = "Invalid Username"
+	} catch (err) {
+		console.log("Error: " + err.message);
 	}
 }
 
