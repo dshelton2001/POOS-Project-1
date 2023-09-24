@@ -33,11 +33,15 @@ function doSignUp() {
 	try {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == XhrReadyState.done && this.status == HttpStatus.success) {
+				let jsonObject = JSON.parse(xhr.responseText);
+
+				if (jsonObject.error.length > 0 ) {
+					usernameInput.classList.add("is-invalid");
+                    console.log("Invalid Username");
+                    return;
+                }
+
 				window.location.href = 'login.html';
-			}
-			else {
-				usernameInput.classList.add("is-invalid");
-				document.getElementById("userFeedBack").innerHTML = "Invalid Username";
 			}
 		};
 		xhr.send(jsonPayload);
