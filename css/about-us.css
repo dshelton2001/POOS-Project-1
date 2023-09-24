@@ -12,10 +12,15 @@ body {
 	padding-right: 16px;
 }
 
-.profile-pic {}
+.card-body {
+	background-image: linear-gradient(to bottom right, red, yellow);
+	border-radius: 7px;
+}
 
 .card {
-	background-color: #2c2f33;
+	border-radius: 7px;
+	border: none;
+	background-color: #32383e;
 }
 
 .card-title,
