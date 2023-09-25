@@ -22,20 +22,20 @@
 
 		//make if statement 
 		if($res == 1){
-			returnWithError("That username already exists.");
 			$check->close();
 			$conn->close();
+			returnWithError("That username already exists.");
+		} else {
+			$check->close();
+
+			$stmt = $conn->prepare("INSERT into Users (FirstName, LastName, Username, Password) VALUES(?,?,?,?)");
+			$stmt->bind_param("ssss", $fName, $lName, $userName, $pwd);
+			$stmt->execute();
+			$stmt->close();
+	
+			$conn->close();
+			returnWithError("");
 		}
-
-		$check->close();
-
-		$stmt = $conn->prepare("INSERT into Users (FirstName, LastName, Username, Password) VALUES(?,?,?,?)");
-		$stmt->bind_param("ssss", $fName, $lName, $userName, $pwd);
-		$stmt->execute();
-		$stmt->close();
-
-		$conn->close();
-		returnWithError("");
 	}
 
 	function getRequestInfo()
