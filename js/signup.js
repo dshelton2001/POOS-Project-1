@@ -37,10 +37,9 @@ function doSignUp() {
 
 				if (jsonObject.error.length > 0 ) {
 					usernameInput.classList.add("is-invalid");
-                    userFeedBack.innerHTML = "Invalid Username";
+					document.getElementById("userFeedBack").innerHTML = "Invalid Username";
                     return;
                 }
-
 				window.location.href = 'login.html';
 			}
 		};
