@@ -37,7 +37,7 @@ function doSignUp() {
 
 				if (jsonObject.error.length > 0 ) {
 					usernameInput.classList.add("is-invalid");
-                    console.log("Invalid Username");
+                    userFeedBack.innerHTML = "Invalid Username";
                     return;
                 }
 
